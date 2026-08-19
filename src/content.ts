@@ -28,7 +28,7 @@ export const resumeHref = "/justin-de-la-cruz-resume.pdf";
 
 export const hero = {
   name: "Justin J. De La Cruz",
-  tagline: "Software Engineer · Founder",
+  tagline: "Software Developer · Founder",
   positioning: {
     before:
       "I build software and hardware products from idea to working prototype. Currently building ",

@@ -70,7 +70,7 @@
   --text-desc: 0.875rem; /* 14px — descriptions */
   --text-desc--line-height: 1.7;
 
-  --text-tagline: 0.8125rem; /* 13px — mono byline under the name, e.g. "Software Engineer · Founder" */
+  --text-tagline: 0.8125rem; /* 13px — mono byline under the name, e.g. "Software Developer · Founder" */
   --text-tagline--line-height: 1.5;
   --text-tagline--letter-spacing: 0.04em;
 
