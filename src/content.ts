@@ -150,7 +150,6 @@ export const contact = {
   links: [
     { label: "LinkedIn", href: social.linkedin },
     { label: "GitHub", href: social.github },
-    // TODO — Justin: drop the PDF at public/justin-de-la-cruz-resume.pdf.
     { label: "Résumé", href: resumeHref },
   ],
 } as const;

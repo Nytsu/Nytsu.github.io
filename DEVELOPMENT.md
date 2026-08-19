@@ -36,14 +36,12 @@ field test — that used to live on the homepage.
 
 Outstanding `TODO`s in that file (search for `TODO`):
 
-- LinkedIn URL
-- Contact email (currently the hotmail address)
-- Résumé PDF at `public/justin-de-la-cruz-resume.pdf`
-- Tags for the Fencing Federation Platform entry, if you want the stack shown
-- The INprende end date ("2023 — 2026") — confirm before this ships
-- The JustIn live-field-test breakdown (`justinFieldTest.detail`) — the
-  summary line is filled in; the What worked / What didn't / Learned /
-  Feedback / Next test rows need your actual, factual account
+- The INprende end date ("2023 – 2026") — confirm before this ships
+- The JustIn live-field-test breakdown (`justinFieldTest.detail`) has only
+  what's factually known (Tested, Setup). What worked / what didn't / what
+  was learned / what instructors said were deliberately left out rather than
+  shipped as placeholder text — add them as new `detail` entries once you
+  have a real, specific answer for each.
 
 ## Pages
 
