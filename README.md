@@ -1,15 +1,23 @@
-# Hey, I'm Justin 👋
+# Justin J. De La Cruz — Portfolio
 
-### Software Developer · Founder · Product Builder
+Personal portfolio: who I am, what I build, and the JustIn case study.
 
-I build software and hardware products from idea to working prototype.
+**Live:** <https://nytsu.github.io>
 
-Currently building **[JustIn](https://justinfencing.com)**, a wireless scoring and performance measurement system for competitive fencing.
+React, Vite, TypeScript, and Tailwind CSS v4. Two static pages, a
+token-enforced design system, no client-side router. See
+[`DEVELOPMENT.md`](DEVELOPMENT.md) for how it's built and how to run it
+locally.
 
-`TypeScript` · `React` · `React Native` · `Node.js` · `Python` · `AWS` · `Microcontroller` · `C++` · `BLE`
+## Quick start
 
-I enjoy working across the stack, from embedded systems and firmware to applications and product design.
+```bash
+pnpm install
+pnpm dev
+```
 
-I also compete in fencing, which is what led me to build JustIn.
+## Links
 
-**[Portfolio](https://nytsu.github.io/nytsu/)** · **[LinkedIn](https://linkedin.com/in/justinjdelacruz)** · **[JustIn](https://justinfencing.com)**
+- [JustIn](https://justinfencing.com), the product this portfolio introduces
+- [LinkedIn](https://linkedin.com/in/justinjdelacruz)
+- [GitHub](https://github.com/Nytsu)

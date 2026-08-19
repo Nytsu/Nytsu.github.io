@@ -3,9 +3,8 @@
 Personal portfolio. React + Vite + TypeScript + Tailwind v4, deployed to
 GitHub Pages at <https://nytsu.github.io/>.
 
-> `README.md` in this repo is the **GitHub profile README** — it renders on
-> <https://github.com/Nytsu>. Don't repurpose it for project docs. This file is
-> the project doc.
+`README.md` is the short project overview. This file is the deeper technical
+doc: setup, the design-token system, quality gates, and deployment.
 
 ## Setup
 
@@ -144,9 +143,12 @@ workflow's output is ignored and Pages serves the repo source instead — which
 renders a blank page, because the source `index.html` points at
 `/src/main.tsx` and browsers reject it on MIME type.
 
-`vite.config.ts` sets `base: "/"` because this is a GitHub *user site* (the repo
-name matches the username), served at the domain root. If the site ever moves to
-a project repo, `base` must become `"/<repo>/"`.
+`vite.config.ts` sets `base: "/"` because the repo is named `Nytsu.github.io`,
+GitHub's special naming convention for a *user site* (the repo must be named
+exactly `<username>.github.io`, not just match the username) — that's what
+gets it served at the domain root instead of under `/<repo>/`. If the site
+ever moves to a different, non-`.github.io`-named repo, `base` must become
+`"/<repo>/"`.
 
 ### Adding a custom domain later
 
