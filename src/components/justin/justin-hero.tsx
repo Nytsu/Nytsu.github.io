@@ -1,4 +1,5 @@
 import { justinHero } from "../../content";
+import Reveal from "../reveal";
 
 /**
  * Same visual grammar as the homepage Hero (mark, mono eyebrow, name-scale
@@ -6,7 +7,7 @@ import { justinHero } from "../../content";
  */
 export default function JustinHero() {
   return (
-    <section className="pt-[13vh]">
+    <Reveal className="pt-[13vh]">
       <div className="mb-7 flex items-center gap-2.5">
         <span className="mark" aria-hidden="true" />
         <span className="section-label">{justinHero.eyebrow}</span>
@@ -21,6 +22,6 @@ export default function JustinHero() {
       </p>
 
       <p className="section-label">{justinHero.tags.join(" · ")}</p>
-    </section>
+    </Reveal>
   );
 }

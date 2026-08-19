@@ -1,4 +1,5 @@
 import { featured, projects } from "../content";
+import Reveal from "./reveal";
 
 /**
  * One section, three projects, deliberately unequal treatment. JustIn is the
@@ -12,7 +13,7 @@ import { featured, projects } from "../content";
  */
 export default function Work() {
   return (
-    <section id="work" className="scroll-mt-24 border-rule border-t pt-8">
+    <Reveal id="work" className="scroll-mt-24 border-rule border-t pt-8">
       <p className="section-label mb-8">{featured.label}</p>
 
       <div className="mb-8 border-rule-faint border-b pb-8">
@@ -63,6 +64,6 @@ export default function Work() {
           </li>
         ))}
       </ul>
-    </section>
+    </Reveal>
   );
 }

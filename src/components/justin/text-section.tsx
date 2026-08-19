@@ -1,7 +1,9 @@
+import Reveal from "../reveal";
+
 /**
  * Generic label + paragraph(s) section, reused across the JustIn page
- * (Overview, Problem, VirtualGround) so those don't need one-off components
- * for what is structurally the same block.
+ * (Overview, Problem) so those don't need one-off components for what is
+ * structurally the same block.
  */
 export default function TextSection({
   label,
@@ -11,7 +13,7 @@ export default function TextSection({
   paragraphs: readonly string[];
 }) {
   return (
-    <section className="border-rule border-t pt-8">
+    <Reveal className="border-rule border-t pt-8">
       <p className="section-label mb-6">{label}</p>
       <div className="flex flex-col gap-4">
         {paragraphs.map((paragraph) => (
@@ -20,6 +22,6 @@ export default function TextSection({
           </p>
         ))}
       </div>
-    </section>
+    </Reveal>
   );
 }

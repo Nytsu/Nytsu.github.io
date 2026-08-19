@@ -1,4 +1,5 @@
 import { justinArchitecture } from "../../content";
+import Reveal from "../reveal";
 
 /**
  * The pipeline as a plain mono chain with arrow separators — structure, not
@@ -7,7 +8,7 @@ import { justinArchitecture } from "../../content";
  */
 export default function Architecture() {
   return (
-    <section className="border-rule border-t pt-8">
+    <Reveal className="border-rule border-t pt-8">
       <p className="section-label mb-6">{justinArchitecture.label}</p>
 
       <ol className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-2 font-mono text-nav text-copy">
@@ -23,9 +24,13 @@ export default function Architecture() {
         ))}
       </ol>
 
-      <p className="max-w-[29rem] text-desc text-copy">
-        {justinArchitecture.text}
-      </p>
-    </section>
+      <div className="flex flex-col gap-4">
+        {justinArchitecture.text.map((paragraph) => (
+          <p key={paragraph} className="max-w-[29rem] text-desc text-copy">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+    </Reveal>
   );
 }

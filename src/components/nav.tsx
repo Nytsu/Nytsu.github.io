@@ -33,6 +33,10 @@ export default function Nav({
           <li key={item.href}>
             <a
               href={item.href}
+              target={item.href.startsWith("http") ? "_blank" : undefined}
+              rel={
+                item.href.startsWith("http") ? "noreferrer noopener" : undefined
+              }
               className="text-nav text-secondary transition-colors hover:text-ink"
             >
               {item.label}

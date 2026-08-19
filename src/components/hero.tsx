@@ -1,9 +1,11 @@
-import { hero } from "../content";
+import { hero, justinUrl } from "../content";
+import Reveal from "./reveal";
 
 /**
  * The mark, the name, the positioning statement. The accent appears exactly
- * twice: the mark, and one word in the positioning line. Nothing else on this
- * screen gets it.
+ * twice: the mark, and one word in the positioning line, which is also the
+ * one place this page links out to the JustIn product site (justinfencing.com)
+ * rather than the case study at /justin/.
  *
  * Deliberately stops there — no capability list. Scope (hardware, firmware,
  * app, design) is demonstrated through the work below instead of asserted here.
@@ -13,10 +15,9 @@ import { hero } from "../content";
  */
 export default function Hero() {
   return (
-    <section id="about" className="scroll-mt-24 pt-[13vh]">
-      <div className="mb-7 flex items-center gap-2.5">
+    <Reveal className="pt-[13vh]">
+      <div className="mb-7">
         <span className="mark" aria-hidden="true" />
-        <span className="section-label">One touch</span>
       </div>
 
       <h1 className="mb-4 text-name-sm font-medium text-ink sm:whitespace-nowrap sm:text-name">
@@ -29,9 +30,33 @@ export default function Hero() {
 
       <p className="max-w-[27.5rem] text-body text-copy">
         {hero.positioning.before}
-        <span className="text-accent-deep">{hero.positioning.accent}</span>
+        <a
+          href={justinUrl}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="text-accent-deep underline decoration-rule underline-offset-4 transition-colors hover:decoration-accent-deep"
+        >
+          {hero.positioning.accent}
+        </a>
         {hero.positioning.after}
       </p>
-    </section>
+
+      <ul className="mt-6 flex gap-4">
+        {hero.links.map((link) => (
+          <li key={link.label}>
+            <a
+              href={link.href}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel={
+                link.href.startsWith("http") ? "noreferrer noopener" : undefined
+              }
+              className="text-nav text-secondary transition-colors hover:text-ink"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Reveal>
   );
 }

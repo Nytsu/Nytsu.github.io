@@ -1,4 +1,5 @@
 import { contact } from "../content";
+import Reveal from "./reveal";
 
 /**
  * Email, links, résumé. No form — a form is a thing to maintain and a place for
@@ -21,7 +22,7 @@ export default function Contact({
   const address = `${contact.email.user}@${contact.email.domain}`;
 
   return (
-    <section id="contact" className="scroll-mt-24 border-rule border-t pt-8">
+    <Reveal id="contact" className="scroll-mt-24 border-rule border-t pt-8">
       <p className="section-label mb-6">{label}</p>
 
       <p className="mb-8 max-w-[27.5rem] text-body text-copy">
@@ -51,6 +52,6 @@ export default function Contact({
           </li>
         ))}
       </ul>
-    </section>
+    </Reveal>
   );
 }

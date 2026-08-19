@@ -1,4 +1,5 @@
 import Contact from "./components/contact";
+import Footer from "./components/footer";
 import Grain from "./components/grain";
 import Architecture from "./components/justin/architecture";
 import FieldTest from "./components/justin/field-test";
@@ -13,14 +14,12 @@ import {
   justinOverview,
   justinProblem,
   justinSoftware,
-  justinVirtualGround,
 } from "./content";
 
 /**
  * The dedicated JustIn case study. This is where the technical depth that used
- * to live on the homepage now lives — Problem/Architecture/Hardware/Software/
- * VirtualGround/Live Field Test/Next. The homepage only introduces the project
- * and links here.
+ * to live on the homepage now lives — Overview/Problem/System/Hardware/Software/
+ * Field Test/Next. The homepage only introduces the project and links here.
  *
  * Contact stays at the bottom so a visitor who lands directly on this page
  * (rather than scrolling from the homepage) still has a path to email/résumé.
@@ -58,14 +57,12 @@ export default function JustinApp() {
           label={justinSoftware.label}
           items={justinSoftware.items}
         />
-        <TextSection
-          label={justinVirtualGround.label}
-          paragraphs={[justinVirtualGround.text]}
-        />
         <FieldTest />
         <ListSection label={justinNext.label} items={justinNext.items} />
         <Contact label="Contact" />
       </main>
+
+      <Footer />
     </>
   );
 }

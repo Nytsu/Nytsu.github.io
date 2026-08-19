@@ -1,4 +1,5 @@
 import { justinFieldTest } from "../../content";
+import Reveal from "../reveal";
 
 /**
  * The most important section on this page — it's the proof that JustIn has
@@ -8,7 +9,7 @@ import { justinFieldTest } from "../../content";
  */
 export default function FieldTest() {
   return (
-    <section className="border-rule border-t pt-8">
+    <Reveal className="border-rule border-t pt-8">
       <p className="section-label mb-6">{justinFieldTest.label}</p>
 
       <p className="mb-8 max-w-[29rem] text-body text-copy">
@@ -25,6 +26,6 @@ export default function FieldTest() {
           </div>
         ))}
       </dl>
-    </section>
+    </Reveal>
   );
 }

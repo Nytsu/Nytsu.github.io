@@ -1,4 +1,5 @@
 import { experience, resumeHref } from "../content";
+import Reveal from "./reveal";
 
 /**
  * Short, NDA-safe lines only: company, role, one sentence. No case-study depth
@@ -7,7 +8,7 @@ import { experience, resumeHref } from "../content";
  */
 export default function Experience() {
   return (
-    <section className="border-rule border-t pt-8">
+    <Reveal className="border-rule border-t pt-8">
       <p className="section-label mb-6">02 / Experience</p>
 
       <ul className="mb-6">
@@ -34,6 +35,6 @@ export default function Experience() {
       >
         View résumé →
       </a>
-    </section>
+    </Reveal>
   );
 }

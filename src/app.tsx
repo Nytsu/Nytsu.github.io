@@ -1,6 +1,7 @@
+import About from "./components/about";
 import Contact from "./components/contact";
-import Currently from "./components/currently";
 import Experience from "./components/experience";
+import Footer from "./components/footer";
 import Grain from "./components/grain";
 import Hero from "./components/hero";
 import Nav from "./components/nav";
@@ -26,9 +27,11 @@ export default function App() {
         <Hero />
         <Work />
         <Experience />
-        <Currently />
+        <About />
         <Contact />
       </main>
+
+      <Footer />
     </>
   );
 }
