@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+/* Self-hosted. No request to fonts.googleapis.com — no render-blocking
+   third-party round trip, no third-party knowledge of who visits. */
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource/ibm-plex-mono/400.css";
+
+/* ---------------------------------------------------------------------------
+   Brand tokens — the only design values that exist in this project.
+   Source of truth: brand-guidelines.md
+
+   The `initial` wipes below delete Tailwind's default palette and type scale.
+   After them `bg-blue-500`, `text-lg`, and `text-gray-400` are not real classes
+   and the build fails on them. The brand rules are enforced by the compiler
+   rather than by discipline. Adding a colour here is a deliberate brand
+   decision, which is the intent.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-*: initial;
+  --text-*: initial;
+  --font-serif: initial;
+
+  /* Surfaces ------------------------------------------------------------- */
+  --color-bg: #fdfcfa; /* warm near-white — never #FFFFFF */
+
+  /* Text — every role below clears WCAG 2.1 AA (4.5:1) on --color-bg.
+     Measured: ink 16.93:1 · body 10.76:1 · secondary 5.51:1
+     The guidelines' `muted` (#857D72, 3.96:1) and `faint` (#9C948A, 2.92:1)
+     are deliberately absent: both fail AA at the small sizes they were
+     specified for (11-13px labels and nav). `secondary` carries those roles. */
+  /* Named `copy`, not `body`: a --color-body token would collide with the
+     --text-body font-size token, since both compile to a `text-body` class. */
+  --color-ink: #1c1a17; /* headings, name, active nav */
+  --color-copy: #423b32; /* paragraph copy */
+  --color-secondary: #6e665b; /* labels, nav, taglines, descriptions */
+
+  /* Accent — one hue, two tonal steps, chosen by contrast requirement.
+     `accent` is the settled brand hex and is untouched. At 4.16:1 it clears
+     AA for large text (3:1) but not small text (4.5:1), so it is restricted
+     to the mark (non-text) and 26px titles. `accent-deep` is the same hue one
+     step darker (4.59:1) for accent words inside body copy. Per guidelines
+     section 2, staying in the warm family is the sanctioned move when a new
+     semantic need appears. */
+  --color-accent: #c25e28; /* mark + 26px project titles ONLY */
+  --color-accent-deep: #b85826; /* accent words in 14-17px copy */
+
+  /* Rules — decorative only, never text ---------------------------------- */
+  --color-rule: #e8e4dc; /* section dividers */
+  --color-rule-faint: #f0ede7; /* internal grid dividers */
+
+  /* Type ----------------------------------------------------------------- */
+  --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --text-name: 3.25rem; /* 52px — H1 */
+  --text-name--line-height: 1.05;
+  --text-name--letter-spacing: -0.02em;
+
+  --text-name-sm: 2.125rem; /* 34px — H1 below 640px, so it holds one line */
+  --text-name-sm--line-height: 1.1;
+  --text-name-sm--letter-spacing: -0.02em;
+
+  --text-h2: 1.625rem; /* 26px — project title */
+  --text-h2--line-height: 1.2;
+
+  --text-body: 1.0625rem; /* 17px — body copy */
+  --text-body--line-height: 1.75;
+
+  --text-desc: 0.875rem; /* 14px — descriptions */
+  --text-desc--line-height: 1.7;
+
+  --text-tagline: 0.8125rem; /* 13px — mono byline under the name, e.g. "Software Engineer · Founder" */
+  --text-tagline--line-height: 1.5;
+  --text-tagline--letter-spacing: 0.04em;
+
+  /* Sans now (nav, inline links) alongside its original mono metadata role
+     (dates, tech-item rows, the architecture chain) — one size serves both,
+     since only the font-family class differs per use. */
+  --text-nav: 0.8125rem; /* 13px — nav items, inline links, and small metadata */
+  --text-nav--line-height: 1.4;
+
+  --text-label: 0.6875rem; /* 11px — mono section labels */
+  --text-label--line-height: 1.4;
+  --text-label--letter-spacing: 0.08em;
+
+  /* Layout --------------------------------------------------------------- */
+  --container-column: 47.5rem; /* 760px — max content width */
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-copy);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    color: var(--color-ink);
+  }
+
+  /* Visible, on-brand focus for keyboard users. Never remove without a
+     replacement — this is the only affordance a keyboard user gets. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    /* !important is correct here and must stay. This block exists to override
+       author styles unconditionally for people who have asked their OS to
+       reduce motion — a vestibular accessibility need. Losing to a more
+       specific selector is the exact failure it is written to prevent. */
+    *,
+    *::before,
+    *::after {
+      /* biome-ignore-start lint/complexity/noImportantStyles: must beat author specificity — see above */
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      /* biome-ignore-end lint/complexity/noImportantStyles: end of reduced-motion override */
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities — the handful of patterns that repeat enough to name
+--------------------------------------------------------------------------- */
+
+/* Mono section label, e.g. "01 / FEATURED". Uppercase is the sanctioned
+   exception to sentence case (guidelines section 3). */
+@utility section-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  line-height: var(--text-label--line-height);
+  letter-spacing: var(--text-label--letter-spacing);
+  color: var(--color-secondary);
+  text-transform: uppercase;
+}
+
+/* The mark: one point, fully realised. 5px dot with a soft radial glow.
+   The glow is the single sanctioned decorative gradient in the system. */
+@utility mark {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  box-shadow: 0 0 14px 3px --alpha(var(--color-accent) / 40%);
+}
+
+/* Skip-to-content link.
+   Written explicitly rather than as `sr-only focus:not-sr-only focus:fixed …`:
+   `not-sr-only` sets position:static and `fixed` sets position:fixed at equal
+   specificity, so which one wins comes down to utility order in the generated
+   sheet. That resolved the wrong way and left the link parked off-screen when
+   focused — a skip link that never appears is worse than none, because a
+   keyboard user tabs into a control they cannot see. */
+@utility skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+
+  &:focus {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 60;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-rule);
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: var(--text-nav);
+  }
+}
+
+/* Barely-there grain so the flat warm white doesn't read as sterile.
+   If it is consciously noticeable, it is too strong. */
+@utility grain {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.018;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}

@@ -1,0 +1,42 @@
+name: Link check
+
+# Deliberately NOT part of the deploy gate.
+#
+# External links rot for reasons that have nothing to do with the commit being
+# deployed — a profile gets renamed, a host has a bad afternoon. Blocking a
+# deploy on someone else's uptime is the wrong trade. This runs weekly and on
+# demand, and opens an issue when something breaks.
+#
+# Once the TODO placeholders in src/content.ts are replaced with real URLs, you
+# can promote this to a deploy gate by adding it to the `needs:` list in
+# deploy.yml.
+
+on:
+  schedule:
+    - cron: "0 9 * * 1" # Mondays, 09:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --exclude-path node_modules "src/content.ts" "index.html"
+          fail: false
+
+      - name: Open an issue if links are broken
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Broken links on the portfolio
+          content-filepath: ./lychee/out.md
+          labels: bug

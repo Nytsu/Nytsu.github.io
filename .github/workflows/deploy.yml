@@ -1,0 +1,57 @@
+name: Deploy to GitHub Pages
+
+# REQUIRED ONE-TIME SETUP:
+#   Settings → Pages → Build and deployment → Source = "GitHub Actions".
+#   If it is left on "Deploy from a branch", this workflow's output is ignored
+#   and Pages serves the repo source instead.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never cancel an in-flight production deploy; queue behind it instead.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # Nothing reaches Pages that has not passed types, lint, knip, the brand
+  # guard, audit, and a real build.
+  ci:
+    uses: ./.github/workflows/ci.yml
+
+  deploy:
+    needs: ci
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - uses: actions/configure-pages@v6
+
+      # ./dist, not '.' — this is the line the original workflow got wrong.
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v5

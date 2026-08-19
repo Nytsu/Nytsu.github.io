@@ -1,0 +1,26 @@
+version: 2
+
+# The real answer to "keep everything updated": Dependabot opens the PR whether
+# or not anyone remembers to check. Minor and patch bumps are grouped into a
+# single PR so this stays one review a week, not eight.
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    commit-message:
+      prefix: "deps"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "ci"

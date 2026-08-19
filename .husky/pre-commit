@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+#
+# Fast checks only — this must stay under a couple of seconds.
+#
+# Type checking, knip, and the build deliberately live in CI instead. A
+# pre-commit hook that takes ten seconds is a hook you start bypassing with
+# --no-verify, and a bypassed hook protects nothing.
+pnpm exec lint-staged

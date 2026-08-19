@@ -1,0 +1,70 @@
+name: CI
+
+# No `push: main` trigger here on purpose: deploy.yml already calls this
+# workflow as its gate, so adding one would run the whole suite twice on
+# every push to main.
+on:
+  pull_request:
+  workflow_call: # deploy.yml gates on this
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # pnpm version is read from package.json "packageManager".
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Types
+        run: pnpm check:types
+
+      - name: Lint and format
+        run: pnpm lint
+
+      - name: Unused files, exports and dependencies
+        run: pnpm knip
+
+      - name: Brand guard
+        run: pnpm check:brand
+
+      # Deliberately --audit-level=high, not moderate.
+      #
+      # This is a static site: no server, no database, no user input, no secrets
+      # in the bundle. Nearly every moderate advisory here will sit in build
+      # tooling that never ships a byte to a visitor, and cannot be reached by
+      # anyone loading the page. Gating on those trains you to ignore the signal,
+      # which is worse than not having it. High and critical still block.
+      - name: Audit dependencies
+        run: pnpm audit --audit-level=high
+
+      - name: Build
+        run: pnpm build
+
+      # The failure this repo shipped with: the old workflow published the repo
+      # root, so Pages served the source index.html pointing at /src/main.tsx.
+      # Browsers reject that on MIME type and the page renders blank.
+      - name: Verify built output, not source
+        run: |
+          for page in dist/index.html dist/justin/index.html; do
+            if grep -qE 'src="/?\.?/src/(main|justin-main)\.tsx"' "$page"; then
+              echo "::error::$page still references the dev entry point — the build did not replace it."
+              exit 1
+            fi
+            if ! grep -qE 'src="/assets/[^"]+\.js"' "$page"; then
+              echo "::error::$page has no hashed asset bundle — output looks wrong."
+              exit 1
+            fi
+          done
+          echo "Built output verified."
