@@ -15,8 +15,9 @@
     "format": "biome check --write .",
     "check:types": "tsc --noEmit",
     "check:brand": "./scripts/check-brand.sh",
+    "check:assets": "./scripts/check-assets.sh",
     "knip": "knip",
-    "check": "pnpm check:types && pnpm lint && pnpm knip && pnpm check:brand",
+    "check": "pnpm check:types && pnpm lint && pnpm knip && pnpm check:brand && pnpm check:assets",
     "prepare": "husky"
   },
   "dependencies": {

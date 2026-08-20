@@ -111,9 +111,14 @@ Three layers, deliberately separated by speed:
 
 1. **Pre-commit** (husky + lint-staged) — Biome on staged files only. Kept under
    a couple of seconds on purpose. A slow hook is a bypassed hook.
-2. **CI** (`.github/workflows/ci.yml`) — types, lint, knip, brand guard,
-   `pnpm audit --audit-level=high`, build, and a check that the built HTML is
-   real output rather than the dev entry point.
+2. **CI** (`.github/workflows/ci.yml`) — types, lint, knip, brand guard, asset
+   guard, `pnpm audit --audit-level=high`, build, and a check that the built
+   HTML is real output rather than the dev entry point.
+
+   The asset guard (`pnpm check:assets`) exists because Vite will happily build
+   an image `src` that points at a file missing from `public/` — it is just a
+   string to the bundler. The failure only appears as a broken image on the
+   live page, so it is caught here instead.
 3. **Deploy** (`.github/workflows/deploy.yml`) — gated on CI via `needs:`.
    Nothing reaches Pages that did not pass.
 

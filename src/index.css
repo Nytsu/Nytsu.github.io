@@ -190,6 +190,26 @@
   }
 }
 
+/* Full-size image viewer for case-study figures.
+   A <dialog>, so the browser handles Escape, focus trapping, and inerting the
+   page behind it. Only the presentation lives here.
+
+   The backdrop is a warm near-ink wash rather than black: the guidelines
+   forbid pure #000 anywhere, and a neutral black backdrop reads cold against
+   this palette. */
+.lightbox {
+  max-width: min(94vw, 1600px);
+  max-height: 94vh;
+  padding: 0;
+  border: 1px solid var(--color-rule);
+  background-color: var(--color-bg);
+  color: var(--color-copy);
+}
+
+.lightbox::backdrop {
+  background-color: color-mix(in srgb, var(--color-ink) 78%, transparent);
+}
+
 /* Barely-there grain so the flat warm white doesn't read as sterile.
    If it is consciously noticeable, it is too strong. */
 @utility grain {
