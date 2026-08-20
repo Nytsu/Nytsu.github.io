@@ -20,6 +20,7 @@ export default defineConfig({
       input: {
         main: "index.html",
         justin: "justin/index.html",
+        federation: "federation/index.html",
       },
     },
   },

@@ -13,3 +13,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# Pre-edit screenshot originals. Kept out of git and out of public/ on
+# purpose: these still contain the unredacted ID numbers.
+.screenshot-originals

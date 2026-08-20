@@ -1,11 +1,11 @@
+import ListSection from "./components/case-study/list-section";
+import TextSection from "./components/case-study/text-section";
 import Contact from "./components/contact";
 import Footer from "./components/footer";
 import Grain from "./components/grain";
 import Architecture from "./components/justin/architecture";
 import FieldTest from "./components/justin/field-test";
 import JustinHero from "./components/justin/justin-hero";
-import ListSection from "./components/justin/list-section";
-import TextSection from "./components/justin/text-section";
 import Nav from "./components/nav";
 import {
   justinHardware,

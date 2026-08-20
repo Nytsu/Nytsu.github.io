@@ -39,6 +39,11 @@ jobs:
       - name: Brand guard
         run: pnpm check:brand
 
+      # Vite happily builds a `src` pointing at a file that isn't in public/,
+      # and the breakage only shows up on the live page.
+      - name: Asset guard
+        run: pnpm check:assets
+
       # Deliberately --audit-level=high, not moderate.
       #
       # This is a static site: no server, no database, no user input, no secrets

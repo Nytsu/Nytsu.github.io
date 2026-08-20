@@ -20,14 +20,14 @@ export type AccentedText = {
   readonly after: string;
 };
 
-/** `href`/`linkLabel` are optional so a compact work entry can go either way —
- * some link out, some don't. Typed explicitly rather than inferred so the
- * shape doesn't collapse to "no link" the moment every current entry lacks one. */
+/** `links` is a list rather than a single `href`/`linkLabel` pair because an
+ * entry can legitimately point at two different places: a case study on this
+ * site and the live thing itself. Typed explicitly rather than inferred so the
+ * shape doesn't collapse to "no links" the moment an entry lacks them. */
 export type Project = {
   readonly title: string;
   readonly description: string;
-  readonly href?: string;
-  readonly linkLabel?: string;
+  readonly links?: readonly { readonly label: string; readonly href: string }[];
 };
 
 /** Shared so the résumé link is identical wherever it appears (Experience, Contact). */
@@ -95,8 +95,10 @@ export const projects: readonly Project[] = [
     title: "Puerto Rico's Fencing Federation Platform",
     description:
       "Registration, licensing, event entry, and member-management systems for a national fencing federation, built on WordPress with custom plugins and code.",
-    href: "https://fedesgrimapuertorico.org",
-    linkLabel: "View site",
+    links: [
+      { label: "View project", href: "/federation/" },
+      { label: "View site", href: "https://fedesgrimapuertorico.org" },
+    ],
   },
 ];
 
@@ -263,5 +265,154 @@ export const justinNext = {
     "Further hardware refinement",
     "FCC / CE certification",
     "Paid club pilots",
+  ],
+} as const;
+
+// -----------------------------------------------------------------------------
+// Fencing Federation project page (/federation/)
+//
+// This page exists for a specific reason: of everything in the portfolio, this
+// is the closest thing to forward-deployed engineering. An external
+// organisation, real operational systems, real stakeholders, a live season
+// depending on it. That is the story this page has to tell.
+//
+// Role section: deliberately does not state an employment title (contractor,
+// volunteer, staff) — Justin was explicit that the informal, undefined nature
+// of the relationship should not be stated on the portfolio. What is stated
+// instead is what actually happened: he was already involved with the
+// federation's website, identified the operational problem himself, and built
+// the fix. That is true, and it reads as more senior than any title would.
+// -----------------------------------------------------------------------------
+
+export const federationNav = [{ label: "← Home", href: "/" }] as const;
+
+export const federationHero = {
+  eyebrow: "Fencing Federation",
+  title: "Member and event systems for a national federation",
+  intro:
+    "The registration, licensing, and member-management platform for Puerto Rico's fencing federation, built and maintained for an organisation that runs a competitive season on it.",
+  tags: ["WordPress", "PHP", "Custom scripting", "Member systems"],
+} as const;
+
+export const federationOverview = {
+  label: "01 / Overview",
+  text: [
+    "Puerto Rico's fencing federation licenses athletes, registers them for competition, and keeps the member records a national governing body is required to keep. I built the platform that does it, on WordPress: plugins where they fit, custom code where they did not.",
+    "Unlike JustIn, this was not my product to define. The federation had existing obligations, existing categories, and an existing way of working, and the system had to fit those rather than replace them.",
+  ],
+} as const;
+
+export const federationProblem = {
+  label: "02 / Problem",
+  text: "Before the platform, the federation ran on paper. Athletes filled out forms by hand, and the federation copied that information onto a spreadsheet. Every new season or event meant re-entering the same information again, with nothing connecting one record to the next.",
+} as const;
+
+export const federationRole = {
+  label: "03 / Role",
+  text: "I was already involved with the federation's website when I saw how much of their process was manual and repeated. I proposed a self-service platform and built it end to end: architecture, plugin selection, and the custom-scripted dashboard and registration flow.",
+} as const;
+
+export const federationConstraints = {
+  label: "04 / Constraints",
+  text: "The federation already paid for managed WordPress hosting on GoDaddy, but there was no budget for paid plugins on top of it. Everything had to be built inside what that subscription already covered. That is why the dashboard and the registration flow are custom-scripted, and why competition payments run through Forminator's free tier instead of a paid gateway add-on.",
+} as const;
+
+export const federationBuilt = {
+  label: "05 / What I built",
+  items: [
+    "Athlete login and signup",
+    "Athlete dashboard",
+    "Digital athlete ID",
+    "Registration and licensing",
+    "Member records and management",
+  ],
+} as const;
+
+/** Split per Justin's own account: the dashboard and the registration /
+ *  inscription flow are custom-scripted into the page rather than off-the-shelf
+ *  plugin behaviour; everything else runs on plugins. That split is worth
+ *  keeping visible rather than flattening into one undifferentiated "custom
+ *  plugins" line, since it's the more specific, more defensible claim in an
+ *  interview.
+ *  Hosting is GoDaddy managed WordPress, paid for by the federation before this
+ *  project started. The budget constraint was on plugins, not the plan itself.
+ *
+ *  Forminator handles forms and competition payments on its free tier. Worth
+ *  keeping the phrasing accurate: that piece was configured, not written, and
+ *  claiming a hand-built payment integration is the kind of thing that falls
+ *  apart in a follow-up question. The custom work is the dashboard and the
+ *  registration flow, which is a strong enough claim on its own.
+ *
+ *  TODO — Justin: confirm the plugin is Forminator (WPMU DEV) rather than a
+ *  similarly named one, and name any plugin you extended rather than just
+ *  configured. */
+export const federationStack = {
+  label: "06 / Stack",
+  items: [
+    "WordPress",
+    "GoDaddy managed hosting",
+    "PHP",
+    "MySQL",
+    "Custom scripting (dashboard, registration)",
+    "Forminator (forms, payments)",
+  ],
+} as const;
+
+export const federationOutcome = {
+  label: "07 / Outcome",
+  text: "The platform is live, and athletes are actively registering on it. The most consistent feedback is about what it replaced: membership tied to one account, tournament registration without re-entering information, and a single dashboard for federation services. The digital athlete ID turned out to be the most requested piece after launch: proof, downloadable straight from an athlete's own account, that they are a currently registered competitive fencer in Puerto Rico.",
+} as const;
+
+/**
+ * Screenshots come from Justin's own athlete account on the live platform, so
+ * every record in them is his own. The redactions are his choice, not a
+ * third-party obligation: the federative and FIE numbers encode his date of
+ * birth, so both were removed before publishing.
+ *
+ * Ordered as the athlete journey rather than as a feature list: create an
+ * account, sign in, land on the dashboard, pull up the ID, register for a
+ * competition. That sequence is the argument for the platform.
+ *
+ * Sources are edited, not raw captures. Browser chrome was cropped off the
+ * dashboard, and the FIE number and expiry bleeding past the ID modal were
+ * removed by rebuilding the background gradient underneath. Originals are NOT
+ * kept in public/ on purpose: anything under public/ is copied into dist/ and
+ * published, which would have defeated the redaction entirely.
+ */
+export const federationFigures = {
+  label: "08 / Screenshots",
+  intro:
+    "The athlete-facing side of the platform, in the order an athlete meets it: account creation, sign-in, the dashboard, the digital ID, and competition registration.",
+  figures: [
+    {
+      src: "/images/federation/signup.png",
+      alt: "The account creation form, collecting first name, paternal and maternal surnames, email, date of birth, and a password with confirmation.",
+      caption: "Account signup",
+      ratio: "1600 / 910",
+    },
+    {
+      src: "/images/federation/login.png",
+      alt: "The federation login screen: email and password fields, a keep-me-signed-in checkbox, a forgotten-password link, and a link to create an account.",
+      caption: "Login",
+      ratio: "1600 / 908",
+    },
+    {
+      src: "/images/federation/dashboard.png",
+      alt: "An athlete dashboard showing federative membership and FIE licence status with expiry dates, club, weapon, category, and account type, plus shortcuts to edit the profile and register for competitions.",
+      caption: "Athlete dashboard",
+      ratio: "1600 / 911",
+    },
+    {
+      src: "/images/federation/dashboard-id.png",
+      alt: "The digital athlete ID open over the dashboard as a card: photo, name, club, season and expiry date, with options to flip the card and download it as a PDF.",
+      caption: "Digital athlete ID",
+      ratio: "1600 / 915",
+    },
+    {
+      src: "/images/federation/competition-registration.png",
+      alt: "The competition registration screen listing open national and international events, filterable by weapon and status, each with its own registration button and closing date.",
+      caption: "Competition registration",
+      ratio: "1600 / 913",
+    },
   ],
 } as const;

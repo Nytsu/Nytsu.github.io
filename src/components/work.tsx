@@ -47,19 +47,23 @@ export default function Work() {
             <p className="max-w-[29rem] text-desc text-secondary">
               {project.description}
             </p>
-            {"href" in project && (
-              <a
-                href={project.href}
-                target={project.href.startsWith("http") ? "_blank" : undefined}
-                rel={
-                  project.href.startsWith("http")
-                    ? "noreferrer noopener"
-                    : undefined
-                }
-                className="mt-2 inline-block text-nav text-secondary underline decoration-rule underline-offset-4 transition-colors hover:text-ink hover:decoration-accent"
-              >
-                {project.linkLabel} →
-              </a>
+            {project.links && (
+              <div className="mt-2 flex flex-wrap gap-x-5 gap-y-2">
+                {project.links.map((link) => {
+                  const external = link.href.startsWith("http");
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noreferrer noopener" : undefined}
+                      className="text-nav text-secondary underline decoration-rule underline-offset-4 transition-colors hover:text-ink hover:decoration-accent"
+                    >
+                      {link.label} →
+                    </a>
+                  );
+                })}
+              </div>
             )}
           </li>
         ))}
