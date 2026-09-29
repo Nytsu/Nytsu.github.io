@@ -25,6 +25,23 @@
   "timeline": {
     "replay": "Replay drawing"
   },
+  "workPage": {
+    "onThisPage": "On this page",
+    "overview": "Overview",
+    "spec": {
+      "role": "Role",
+      "scope": "Scope",
+      "status": "Status",
+      "builtWith": "Built with"
+    },
+    "sections": {
+      "problem": "The problem",
+      "what-i-built": "What I built",
+      "how-it-works": "How it works",
+      "results": "Results",
+      "next": "What is next"
+    }
+  },
   "placeholder": {
     "about": {
       "eyebrow": "About — placeholder",
