@@ -32,13 +32,15 @@
   --font:
     var(--font-geist), system-ui, -apple-system, "Segoe UI", "Hiragino Sans",
     "Noto Sans JP", sans-serif;
-  --font-head: var(--font-zen-kaku); /* brief §12 open decision, resolved:
+  --font-head: var(
+    --font-zen-kaku
+  ); /* brief section 12 open decision, resolved:
     Zen Kaku Gothic New for headings, Geist for body. */
   --head-track: -0.01em; /* -0.03em if --font-head ever reverts to Geist */
 }
 
 /* Dark values — automatic via OS preference, or a manual override via
-   data-theme. No toggle control ships yet (brief §12 leaves that open); the
+   data-theme. No toggle control ships yet (brief section 12 leaves that open); the
    hook exists now so adding one later is a one-line change, not a rework. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -70,7 +72,7 @@
   --color-*: initial;
   --text-*: initial;
   --radius-*: initial;
-  --font-serif: initial; /* no serif display type, ever (brief §2) */
+  --font-serif: initial; /* no serif display type, ever (brief section 2) */
 
   /* Surfaces / text ------------------------------------------------------- */
   --color-bg: var(--bg);
@@ -114,7 +116,7 @@
   --text-small--line-height: 1.5;
 
   --text-label: 0.8125rem; /* 13px — captions, meta. Not mono, not uppercase
-    (brief §2 explicitly avoids tracked mono eyebrow labels). */
+    (brief section 2 explicitly avoids tracked mono eyebrow labels). */
   --text-label--line-height: 1.5;
 
   /* Layout --------------------------------------------------------------
@@ -124,7 +126,7 @@
      separate spacing scale is defined here. */
   --container-page: 70rem; /* 1120px */
 
-  /* Timeline (brief §6.4) — the one signature motion on the site. Reduced
+  /* Timeline (brief section 6.4) — the one signature motion on the site. Reduced
      motion isn't handled with a separate no-animation state here: the
      global prefers-reduced-motion rule below forces near-zero duration on
      every animation, and `both` fill-mode guarantees the end state
@@ -178,7 +180,7 @@ a:hover {
   text-decoration-thickness: 2px;
 }
 
-/* Visible, on-brand focus for keyboard users (brief §8: required). */
+/* Visible, on-brand focus for keyboard users (brief section 8: required). */
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
@@ -207,7 +209,7 @@ a:hover {
    Components — the handful of patterns that repeat enough to name.
 --------------------------------------------------------------------------- */
 
-/* The personal mark (brief §6.1): the name in the heading font, semibold,
+/* The personal mark (brief section 6.1): the name in the heading font, semibold,
    with the accent dot tucked in like a period. Not part of the content type
    scale — the tile gives it its own two fixed sizes. */
 @utility wordmark {

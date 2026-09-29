@@ -8,8 +8,8 @@ import { useState } from "react";
 import { Container } from "@/components/container";
 import { Mark } from "@/components/mark";
 
-/** Four items max (brief §5). "Work" points at home: the project index is
- * the home page's centerpiece (brief §5), not a separate route — only
+/** Four items max (brief section 5). "Work" points at home: the project index is
+ * the home page's centerpiece (brief section 5), not a separate route — only
  * individual case studies get their own URL, under /work/[slug]. */
 const links = [
   { key: "work", href: "/" },

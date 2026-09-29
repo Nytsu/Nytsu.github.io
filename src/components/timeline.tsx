@@ -26,7 +26,7 @@ function formatMonthYear(date: Date) {
 }
 
 /**
- * Brief §6.4: the one memorable element on the site. A thin line with
+ * Brief section 6.4: the one memorable element on the site. A thin line with
  * monthly ticks and taller year ticks, milestone markers (filled = past,
  * hollow ring = future), labels alternating above/below by index parity,
  * the last one right-aligned so its label doesn't run off the edge.

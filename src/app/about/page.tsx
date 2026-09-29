@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/container";
 
-/** Placeholder route so nav links resolve. Real content: brief §13 stage 6. */
+/** Placeholder route so nav links resolve. Real content: brief section 13 stage 6. */
 export default async function About() {
   const t = await getTranslations("placeholder.about");
 

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-/** Brief §6.9: a status/caveat callout — e.g. "second field test planned"
+/** Brief section 6.9: a status/caveat callout — e.g. "second field test planned"
  * on a project page. An ink top rule, not a colored box: the system has no
  * "warning yellow" or "info blue," so a note is set apart by structure
  * (the rule) rather than color. */

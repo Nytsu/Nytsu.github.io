@@ -1,6 +1,6 @@
 /**
- * Brief §6.4's "reading progress" variant, used under the nav on project
- * pages (brief §6.7). Presentational only for now — `progress` (0-100) is a
+ * Brief section 6.4's "reading progress" variant, used under the nav on project
+ * pages (brief section 6.7). Presentational only for now — `progress` (0-100) is a
  * plain prop; the actual scroll-position tracking gets wired up in stage 5
  * when the project page template exists to scroll through.
  */

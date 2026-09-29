@@ -12,7 +12,7 @@ export type ProjectIndexItem = {
 };
 
 /**
- * Brief §6.3: the home page centerpiece. Each row is one project, and the
+ * Brief section 6.3: the home page centerpiece. Each row is one project, and the
  * whole row is the link — a reviewer sees the range in a few seconds and
  * reaches any project in one click.
  *

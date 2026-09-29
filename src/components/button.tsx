@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from "react";
 
-/** Brief §6.8: filled ink primary, outlined secondary, 44px minimum height,
+/** Brief section 6.8: filled ink primary, outlined secondary, 44px minimum height,
  * 4px radius, hover to accent. Exported separately from `Button` so a link
  * that should look like a button (e.g. "Download CV") can use the same
  * classes on a Next `Link` instead of duplicating them. */

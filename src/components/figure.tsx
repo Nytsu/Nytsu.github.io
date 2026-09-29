@@ -1,11 +1,11 @@
 import Image from "next/image";
 
-/** Brief §6.5: hairline border, square corners by default, caption in small
+/** Brief section 6.5: hairline border, square corners by default, caption in small
  * muted text that says plainly what the image shows. `ratio` is a real CSS
  * aspect-ratio value (e.g. "16/9", "4/3", "3/4") — set via inline style
  * rather than an arbitrary Tailwind class, since Tailwind can't generate a
  * utility for a value it only sees at runtime. `alt` is required, not
- * optional: brief §8 requires meaningful alt text on every image. */
+ * optional: brief section 8 requires meaningful alt text on every image. */
 export function Figure({
   src,
   alt,

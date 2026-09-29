@@ -15,7 +15,7 @@ type TextareaFieldProps = SharedProps & {
   multiline: true;
 } & Omit<ComponentPropsWithoutRef<"textarea">, "id">;
 
-/** Brief §6.9: visible labels, help text, and error text that says how to
+/** Brief section 6.9: visible labels, help text, and error text that says how to
  * fix it — never color alone. The error state here is a heavier border
  * (2px) plus the help text itself changing to say what's wrong, not a red
  * outline: the token system has no error-red, on purpose. */

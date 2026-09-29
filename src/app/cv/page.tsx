@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/container";
 
 /** Placeholder route so nav links resolve. Real content + print stylesheet:
- * brief §13 stage 6. */
+ * brief section 13 stage 6. */
 export default async function CV() {
   const t = await getTranslations("placeholder.cv");
 

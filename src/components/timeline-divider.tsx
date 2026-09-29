@@ -1,4 +1,4 @@
-/** Brief §6.4's "quiet section divider" variant: the same line motif,
+/** Brief section 6.4's "quiet section divider" variant: the same line motif,
  * turned all the way down — a hairline rule with ticks, purely decorative.
  * Not data-driven like Timeline; it's a fixed visual texture, not a
  * representation of any real sequence. */

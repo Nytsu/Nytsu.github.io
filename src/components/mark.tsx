@@ -1,4 +1,4 @@
-/** The personal mark (brief §6.1, option A: wordmark). A signature, not a
+/** The personal mark (brief section 6.1, option A: wordmark). A signature, not a
  * brand system — the name in the heading font with the accent dot tucked in
  * like a period. Non-breaking spaces keep "De La Cruz" from wrapping. */
 export function Mark({ size = "base" }: { size?: "base" | "sm" }) {

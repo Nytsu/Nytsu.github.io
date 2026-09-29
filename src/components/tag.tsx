@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from "react";
 
-/** Brief §6.9: for filtering the project index. The selected tag gets an
+/** Brief section 6.9: for filtering the project index. The selected tag gets an
  * ink outline — no color-only state, so it still reads under
  * prefers-reduced-transparency or without the accent hue registering. */
 export function Tag({

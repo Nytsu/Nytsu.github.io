@@ -13,7 +13,7 @@ import { TimelineDivider } from "@/components/timeline-divider";
 /**
  * Stage checkpoint only: a plain render of the tokens and core components,
  * so they can be judged in a browser before any real content exists.
- * Replaced by the real homepage in a later stage (brief §13, stage 6).
+ * Replaced by the real homepage in a later stage (brief section 13, stage 6).
  */
 export default async function TokenShowcase() {
   const t = await getTranslations("timeline");
@@ -188,7 +188,7 @@ export default async function TokenShowcase() {
         </h2>
 
         <h3 className="mt-8 component-title text-ink">
-          Timeline (JustIn's real milestones, brief §9)
+          Timeline (JustIn's real milestones, brief section 9)
         </h3>
         <div className="mt-4">
           <Timeline
