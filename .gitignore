@@ -23,3 +23,7 @@ pnpm-debug.log*
 # Not shared via git; CLAUDE.md's @.claude/agent-instructions.md import
 # resolves against whatever's on disk locally.
 .claude/agent-instructions.md
+
+# The project brief. Kept local-only (not published in this public repo's
+# history) rather than shared via git.
+CLAUDE.md

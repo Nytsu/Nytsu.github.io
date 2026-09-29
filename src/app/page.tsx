@@ -1,3 +1,5 @@
+import { Container } from "@/components/container";
+
 /**
  * Stage 1 checkpoint only: a plain render of the token file, so the tokens
  * can be judged in a browser before any real layout or components exist.
@@ -5,7 +7,7 @@
  */
 export default function TokenShowcase() {
   return (
-    <main className="mx-auto max-w-(--container-page) px-6 py-18">
+    <Container className="py-18">
       <p className="text-label text-muted">
         Stage 1 — token check, not the real homepage
       </p>
@@ -68,6 +70,6 @@ export default function TokenShowcase() {
           above.
         </p>
       </div>
-    </main>
+    </Container>
   );
 }

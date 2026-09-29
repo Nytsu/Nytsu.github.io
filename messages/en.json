@@ -1,0 +1,33 @@
+{
+  "skipToContent": "Skip to content",
+  "nav": {
+    "primary": "Primary",
+    "home": "Home",
+    "work": "Work",
+    "about": "About",
+    "cv": "CV",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "This page doesn't exist.",
+    "body": "The link may be out of date, or the page may have moved.",
+    "back": "Back to work"
+  },
+  "placeholder": {
+    "about": {
+      "eyebrow": "About — placeholder",
+      "title": "Coming in a later stage"
+    },
+    "cv": {
+      "eyebrow": "CV — placeholder",
+      "title": "Coming in a later stage"
+    },
+    "contact": {
+      "eyebrow": "Contact — placeholder",
+      "title": "Coming in a later stage"
+    }
+  }
+}

@@ -172,3 +172,64 @@ a:hover {
     /* biome-ignore-end lint/complexity/noImportantStyles: end of reduced-motion override */
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Components — the handful of patterns that repeat enough to name.
+--------------------------------------------------------------------------- */
+
+/* The personal mark (brief §6.1): the name in the heading font, semibold,
+   with the accent dot tucked in like a period. Not part of the content type
+   scale — the tile gives it its own two fixed sizes. */
+@utility wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.5rem; /* 24px */
+  letter-spacing: var(--head-track);
+  line-height: 1;
+  color: var(--color-ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@utility wordmark-sm {
+  font-size: 1rem; /* 16px — nav size */
+}
+
+@utility wordmark-dot {
+  display: inline-block;
+  width: 0.15em;
+  height: 0.15em;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  margin-left: -0.42em;
+  align-self: flex-end;
+  margin-bottom: 0.08em;
+}
+
+/* Skip-to-content link. Written explicitly rather than
+   `sr-only focus:not-sr-only focus:fixed …`: `not-sr-only` sets
+   position:static and `fixed` sets position:fixed at equal specificity, so
+   which one wins depends on utility order in the generated sheet. A skip
+   link that resolves to the wrong one is parked off-screen when focused —
+   worse than no skip link, since a keyboard user tabs into a control they
+   cannot see. */
+@utility skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+
+  &:focus {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 60;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-line);
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-size: var(--text-nav);
+  }
+}

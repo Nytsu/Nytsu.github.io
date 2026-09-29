@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 // Static export for GitHub Pages: no Node server available at hosting time,
 // so `next/image`'s optimization API (which needs a server) is turned off.
@@ -10,4 +11,6 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
+export default withNextIntl(nextConfig);
