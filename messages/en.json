@@ -16,6 +16,15 @@
     "body": "The link may be out of date, or the page may have moved.",
     "back": "Back to work"
   },
+  "projectIndex": {
+    "project": "Project",
+    "role": "Role",
+    "builtWith": "Built with",
+    "status": "Status"
+  },
+  "timeline": {
+    "replay": "Replay drawing"
+  },
   "placeholder": {
     "about": {
       "eyebrow": "About — placeholder",

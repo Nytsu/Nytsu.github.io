@@ -32,9 +32,9 @@
   --font:
     var(--font-geist), system-ui, -apple-system, "Segoe UI", "Hiragino Sans",
     "Noto Sans JP", sans-serif;
-  --font-head: var(--font); /* open decision (brief §12): swap to
-    var(--font-zen-kaku) here for Zen Kaku Gothic New headings */
-  --head-track: -0.03em; /* use -0.01em if headings switch to Zen Kaku Gothic New */
+  --font-head: var(--font-zen-kaku); /* brief §12 open decision, resolved:
+    Zen Kaku Gothic New for headings, Geist for body. */
+  --head-track: -0.01em; /* -0.03em if --font-head ever reverts to Geist */
 }
 
 /* Dark values — automatic via OS preference, or a manual override via
@@ -123,6 +123,36 @@
      already produces the brief's 8px steps (p-2 = 8px … p-18 = 72px), so no
      separate spacing scale is defined here. */
   --container-page: 70rem; /* 1120px */
+
+  /* Timeline (brief §6.4) — the one signature motion on the site. Reduced
+     motion isn't handled with a separate no-animation state here: the
+     global prefers-reduced-motion rule below forces near-zero duration on
+     every animation, and `both` fill-mode guarantees the end state
+     (fully drawn, opacity 1) regardless of how fast it got there. */
+  --animate-tl-draw: tl-draw 1100ms cubic-bezier(0.3, 0.6, 0.2, 1) both;
+  --animate-tl-fade: tl-fade 400ms ease 700ms both;
+  /* Per-milestone stagger: each element sets its own --tl-delay inline
+     (the actual delay is data-driven, computed per milestone in
+     Timeline.tsx — this utility just reads whatever that element set). */
+  --animate-tl-fade-mark: tl-fade 300ms ease var(--tl-delay, 0ms) both;
+}
+
+@keyframes tl-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes tl-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -232,4 +262,15 @@ a:hover {
     color: var(--color-ink);
     font-size: var(--text-nav);
   }
+}
+
+/* The tile's recurring small component-title size (Note's heading, card
+   titles): 16px semibold. Not in the content type scale (13/14/15/17/20/
+   28/52) — that scale is for page content, this is UI chrome for labeling a
+   bordered component block, so it gets its own utility instead of a new
+   --text-* token. */
+@utility component-title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
 }
