@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Brand tokens — the only design values in this project.
+   Source of truth: CLAUDE.md (portfolio build brief), section 3.
+
+   Wiping Tailwind's default color, text, and radius scales means only the
+   tokens below compile to real utilities. An off-brand class like
+   `text-blue-500` or `rounded-lg` emits no CSS instead of silently falling
+   back to a default Tailwind value.
+--------------------------------------------------------------------------- */
+
+:root {
+  --bg: #ffffff;
+  --subtle: #f4f5f6;
+  --ink: #111315;
+  --muted: #5f656d; /* ~5.9:1 on --bg, clears WCAG AA */
+  --line: #e3e5e8;
+
+  /* Accent: one hue at a time, switched by a single variable. */
+  --a-blue: #1f3fbf; /* default */
+  --a-teal: #0b6b66;
+  --a-graphite: #111315;
+  --accent: var(--a-blue);
+  --on-accent: #ffffff;
+
+  --img-radius: 0px; /* images and technical drawings: square by default */
+  --control-radius: 4px; /* buttons, fields, tags */
+
+  /* Self-hosted via next/font (see layout.tsx) — the literal font names
+     never round-trip through Google's CSS, only the variable does. */
+  --font:
+    var(--font-geist), system-ui, -apple-system, "Segoe UI", "Hiragino Sans",
+    "Noto Sans JP", sans-serif;
+  --font-head: var(--font); /* open decision (brief §12): swap to
+    var(--font-zen-kaku) here for Zen Kaku Gothic New headings */
+  --head-track: -0.03em; /* use -0.01em if headings switch to Zen Kaku Gothic New */
+}
+
+/* Dark values — automatic via OS preference, or a manual override via
+   data-theme. No toggle control ships yet (brief §12 leaves that open); the
+   hook exists now so adding one later is a one-line change, not a rework. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0d10;
+    --subtle: #12151a;
+    --ink: #e8eaed;
+    --muted: #9aa1ad;
+    --line: #232830;
+    --a-blue: #8aa0ff;
+    --a-teal: #4fd1c5;
+    --a-graphite: #e8eaed;
+    --on-accent: #0b0d10;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b0d10;
+  --subtle: #12151a;
+  --ink: #e8eaed;
+  --muted: #9aa1ad;
+  --line: #232830;
+  --a-blue: #8aa0ff;
+  --a-teal: #4fd1c5;
+  --a-graphite: #e8eaed;
+  --on-accent: #0b0d10;
+}
+
+@theme inline {
+  --color-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --font-serif: initial; /* no serif display type, ever (brief §2) */
+
+  /* Surfaces / text ------------------------------------------------------- */
+  --color-bg: var(--bg);
+  --color-subtle: var(--subtle);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+
+  /* Radius — one setting per element type, nothing else exists. `rounded-full`
+     (circles: dots, status markers) is untouched by this wipe — Tailwind
+     computes it directly, not from a theme token. */
+  --radius-img: var(--img-radius);
+  --radius-control: var(--control-radius);
+
+  /* Type --------------------------------------------------------------------
+     Scale per the brief: 13, 14, 15, 17 (body), 20, 28, 52 (display). */
+  --font-sans: var(--font);
+  --font-head: var(--font-head);
+
+  --text-display: clamp(2.125rem, 1.4rem + 3.5vw, 3.25rem); /* 34px -> 52px */
+  --text-display--line-height: 1.08;
+  --text-display--letter-spacing: var(--head-track);
+
+  --text-h2: 1.75rem; /* 28px */
+  --text-h2--line-height: 1.25;
+  --text-h2--letter-spacing: calc(var(--head-track) * 0.67);
+
+  --text-h3: 1.25rem; /* 20px */
+  --text-h3--line-height: 1.35;
+  --text-h3--letter-spacing: calc(var(--head-track) * 0.33);
+
+  --text-body: 1.0625rem; /* 17px */
+  --text-body--line-height: 1.75;
+
+  --text-nav: 0.9375rem; /* 15px — buttons, fields, nav links, row cells */
+  --text-nav--line-height: 1.5;
+
+  --text-small: 0.875rem; /* 14px — spec values, table cells, help text */
+  --text-small--line-height: 1.5;
+
+  --text-label: 0.8125rem; /* 13px — captions, meta. Not mono, not uppercase
+    (brief §2 explicitly avoids tracked mono eyebrow labels). */
+  --text-label--line-height: 1.5;
+
+  /* Layout --------------------------------------------------------------
+     The 12-column grid itself lives in the layout component (stage 2); this
+     is just the shared max width. Tailwind's default --spacing (0.25rem)
+     already produces the brief's 8px steps (p-2 = 8px … p-18 = 72px), so no
+     separate spacing scale is defined here. */
+  --container-page: 70rem; /* 1120px */
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-accent);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Visible, on-brand focus for keyboard users (brief §8: required). */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* !important is correct here: this must beat author specificity
+     unconditionally for people who have asked their OS to reduce motion. */
+  *,
+  *::before,
+  *::after {
+    /* biome-ignore-start lint/complexity/noImportantStyles: vestibular accessibility override, see above */
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    /* biome-ignore-end lint/complexity/noImportantStyles: end of reduced-motion override */
+  }
+}
