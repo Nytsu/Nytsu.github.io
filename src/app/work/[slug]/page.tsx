@@ -4,6 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import type { ReactNode } from "react";
 import { Container } from "@/components/container";
 import { Figure } from "@/components/figure";
+import { Note } from "@/components/note";
 import { ScrollReadingProgress } from "@/components/scroll-reading-progress";
 import { Section } from "@/components/section";
 import { SpecBlock } from "@/components/spec-block";
@@ -51,6 +52,8 @@ export default async function WorkPage({
         {children}
       </Section>
     ),
+    Figure,
+    Note,
   };
 
   return (
@@ -86,6 +89,7 @@ export default async function WorkPage({
             ? { src: frontmatter.cover.src, alt: frontmatter.cover.alt }
             : {})}
           ratio="16/9"
+          fullBleed
         />
 
         <div className="mt-4 grid grid-cols-1 gap-12 lg:grid-cols-[200px_1fr]">

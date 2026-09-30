@@ -66,7 +66,7 @@ export function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="border-b border-line">
+    <header className="border-b border-line print:hidden">
       <Container className="flex h-18 items-center justify-between">
         <Link href="/" aria-label={t("home")}>
           <Mark size="sm" />

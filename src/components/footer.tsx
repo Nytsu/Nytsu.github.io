@@ -3,7 +3,7 @@ import { email, github, linkedin } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="border-t border-line">
+    <footer className="border-t border-line print:hidden">
       <Container className="flex flex-col gap-4 py-12 text-small text-muted sm:flex-row sm:items-center sm:justify-between">
         <a href={`mailto:${email}`} className="hover:text-accent">
           {email}

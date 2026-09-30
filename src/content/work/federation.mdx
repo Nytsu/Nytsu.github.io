@@ -1,0 +1,48 @@
+---
+title: "Fencing Federation of Puerto Rico"
+slug: "federation"
+summary: "Registration, licensing, and member-management platform for Puerto Rico's fencing federation."
+role: "Designer, developer"
+scope: "WordPress, custom forms"
+status: "Live"
+builtWith: "WordPress, PHP, custom scripting"
+year: "TBD — confirm with Justin"
+order: 2
+cover:
+  src: "/images/federation/dashboard.png"
+  alt: "An athlete dashboard showing federative membership and FIE licence status with expiry dates, club, weapon, category, and account type, plus shortcuts to edit the profile and register for competitions."
+---
+
+<Section id="problem">
+Before the platform, the federation ran on paper. Athletes filled out forms by hand, and the federation copied that information onto a spreadsheet. Every new season or event meant re-entering the same information again, with nothing connecting one record to the next.
+</Section>
+
+<Section id="what-i-built">
+Puerto Rico's fencing federation licenses athletes, registers them for competition, and keeps the member records a national governing body is required to keep. I built the platform that does it, on WordPress: plugins where they fit, custom code where they did not.
+
+Unlike JustIn, this was not my product to define. The federation had existing obligations, existing categories, and an existing way of working, and the system had to fit those rather than replace them. I was already involved with the federation's website when I saw how much of their process was manual and repeated. I proposed a self-service platform and built it end to end: architecture, plugin selection, and the custom-scripted dashboard and registration flow. What it covers: athlete login and signup, an athlete dashboard, a digital athlete ID, registration and licensing, and member records and management.
+
+<Figure src="/images/federation/signup.png" alt="The account creation form, collecting first name, paternal and maternal surnames, email, date of birth, and a password with confirmation." caption="Account signup" ratio="1600/910" />
+
+<Figure src="/images/federation/login.png" alt="The federation login screen: email and password fields, a keep-me-signed-in checkbox, a forgotten-password link, and a link to create an account." caption="Login" ratio="1600/908" />
+
+<Figure src="/images/federation/dashboard.png" alt="An athlete dashboard showing federative membership and FIE licence status with expiry dates, club, weapon, category, and account type, plus shortcuts to edit the profile and register for competitions." caption="Athlete dashboard" ratio="1600/911" />
+
+<Figure src="/images/federation/dashboard-id.png" alt="The digital athlete ID open over the dashboard as a card: photo, name, club, season and expiry date, with options to flip the card and download it as a PDF." caption="Digital athlete ID" ratio="1600/915" />
+
+<Figure src="/images/federation/competition-registration.png" alt="The competition registration screen listing open national and international events, filterable by weapon and status, each with its own registration button and closing date." caption="Competition registration" ratio="1600/913" />
+</Section>
+
+<Section id="how-it-works">
+The federation already paid for managed WordPress hosting on GoDaddy, but there was no budget for paid plugins on top of it. Everything had to be built inside what that subscription already covered. That's why the dashboard and the registration flow are custom-scripted (PHP, MySQL), and why competition payments run through Forminator's free tier instead of a paid gateway add-on.
+</Section>
+
+<Section id="results">
+The platform is live, and athletes are actively registering on it. The most consistent feedback is about what it replaced: membership tied to one account, tournament registration without re-entering information, and a single dashboard for federation services. The digital athlete ID turned out to be the most requested piece after launch: proof, downloadable straight from an athlete's own account, that they are a currently registered competitive fencer in Puerto Rico.
+</Section>
+
+<Section id="next">
+<Note title="Content needed">
+What's next for this platform hasn't been defined yet — check with Justin before publishing.
+</Note>
+</Section>

@@ -24,7 +24,8 @@
   --accent: var(--a-blue);
   --on-accent: #ffffff;
 
-  --img-radius: 0px; /* images and technical drawings: square by default */
+  --img-radius: 4px; /* brief section 12 open decision, resolved: "slight"
+    rounding for images and technical drawings, not square. */
   --control-radius: 4px; /* buttons, fields, tags */
 
   /* Self-hosted via next/font (see layout.tsx) — the literal font names
@@ -66,6 +67,21 @@
   --a-teal: #4fd1c5;
   --a-graphite: #e8eaed;
   --on-accent: #0b0d10;
+}
+
+/* Print (brief section 5: CV needs a print stylesheet). Force light values
+   regardless of OS dark-mode preference — paper is white, and printing
+   white text on the assumed-dark background would be unreadable. */
+@media print {
+  :root {
+    --bg: #ffffff;
+    --subtle: #f4f5f6;
+    --ink: #111315;
+    --muted: #5f656d;
+    --line: #e3e5e8;
+    --a-blue: #1f3fbf;
+    --on-accent: #ffffff;
+  }
 }
 
 @theme inline {

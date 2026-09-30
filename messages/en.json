@@ -16,11 +16,9 @@
     "body": "The link may be out of date, or the page may have moved.",
     "back": "Back to work"
   },
-  "projectIndex": {
-    "project": "Project",
-    "role": "Role",
-    "builtWith": "Built with",
-    "status": "Status"
+  "home": {
+    "tagline": "Software Developer · Founder",
+    "work": "Work"
   },
   "timeline": {
     "replay": "Replay drawing"
@@ -42,18 +40,23 @@
       "next": "What is next"
     }
   },
-  "placeholder": {
-    "about": {
-      "eyebrow": "About — placeholder",
-      "title": "Coming in a later stage"
-    },
-    "cv": {
-      "eyebrow": "CV — placeholder",
-      "title": "Coming in a later stage"
-    },
-    "contact": {
-      "eyebrow": "Contact — placeholder",
-      "title": "Coming in a later stage"
-    }
+  "about": {
+    "title": "About",
+    "paragraphs": [
+      "I'm a software developer and founder working across software, hardware, and product development. I also compete in fencing, which led directly to JustIn. I saw a problem in a sport I know deeply and decided to build the technology I wanted to exist.",
+      "I enjoy taking ambiguous problems, building complete systems, testing them with real people, and using what I learn to build the next version."
+    ]
+  },
+  "cv": {
+    "title": "CV",
+    "download": "Download PDF",
+    "experience": "Experience"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Interested in hardware-software products, athletic technology, AI, or founder journeys?",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "resume": "Résumé"
   }
 }
