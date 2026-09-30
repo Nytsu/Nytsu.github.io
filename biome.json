@@ -6,7 +6,13 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!dist", "!node_modules"]
+    "includes": [
+      "**",
+      "!.next",
+      "!out",
+      "!node_modules",
+      "!portfolio-style-tile.html"
+    ]
   },
   "formatter": {
     "enabled": true,

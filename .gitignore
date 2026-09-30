@@ -1,8 +1,9 @@
 node_modules
-dist
-dist-ssr
+.next
+out
 *.local
 *.tsbuildinfo
+next-env.d.ts
 
 .DS_Store
 .vscode/*
@@ -17,3 +18,12 @@ pnpm-debug.log*
 # Pre-edit screenshot originals. Kept out of git and out of public/ on
 # purpose: these still contain the unredacted ID numbers.
 .screenshot-originals
+
+# Local-only Claude Code operational rules (e.g. "never commit for me").
+# Not shared via git; CLAUDE.md's @.claude/agent-instructions.md import
+# resolves against whatever's on disk locally.
+.claude/agent-instructions.md
+
+# The project brief. Kept local-only (not published in this public repo's
+# history) rather than shared via git.
+CLAUDE.md

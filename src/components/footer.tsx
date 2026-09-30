@@ -1,15 +1,31 @@
-import { hero } from "../content";
+import { Container } from "@/components/container";
+import { email, github, linkedin } from "@/lib/site";
 
-/**
- * One quiet line, not a legal block. Not wrapped in Reveal: it's page chrome
- * like Nav, not content worth animating in.
- */
-export default function Footer() {
+export function Footer() {
   return (
-    <footer className="mx-auto max-w-column border-rule border-t px-6 pt-8 pb-10 sm:px-12">
-      <p className="font-mono text-label text-secondary">
-        © {new Date().getFullYear()} {hero.name}
-      </p>
+    <footer className="border-t border-line print:hidden">
+      <Container className="flex flex-col gap-1 py-8 text-small text-muted sm:flex-row sm:items-center sm:justify-between">
+        <a
+          href={`mailto:${email}`}
+          className="inline-flex min-h-11 items-center no-underline hover:text-accent"
+        >
+          {email}
+        </a>
+        <div className="flex gap-6">
+          <a
+            href={github}
+            className="inline-flex min-h-11 items-center no-underline hover:text-accent"
+          >
+            GitHub
+          </a>
+          <a
+            href={linkedin}
+            className="inline-flex min-h-11 items-center no-underline hover:text-accent"
+          >
+            LinkedIn
+          </a>
+        </div>
+      </Container>
     </footer>
   );
 }

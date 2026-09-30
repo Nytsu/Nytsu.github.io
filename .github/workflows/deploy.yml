@@ -21,8 +21,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Nothing reaches Pages that has not passed types, lint, knip, the brand
-  # guard, audit, and a real build.
+  # Nothing reaches Pages that has not passed types, lint, audit, and a real
+  # build.
   ci:
     uses: ./.github/workflows/ci.yml
 
@@ -48,10 +48,11 @@ jobs:
 
       - uses: actions/configure-pages@v6
 
-      # ./dist, not '.' — this is the line the original workflow got wrong.
+      # ./out, not '.' — Next's static export (output: "export") writes here,
+      # not ./dist (that was the old Vite build's output directory).
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: ./dist
+          path: ./out
 
       - id: deployment
         uses: actions/deploy-pages@v5

@@ -1,0 +1,66 @@
+{
+  "skipToContent": "Skip to content",
+  "nav": {
+    "primary": "Primary",
+    "home": "Home",
+    "work": "Work",
+    "about": "About",
+    "cv": "CV",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "This page doesn't exist.",
+    "body": "The link may be out of date, or the page may have moved.",
+    "back": "Back to work"
+  },
+  "home": {
+    "tagline": "Software Developer · Founder",
+    "work": "Work",
+    "metaDescription": "Founder and engineer building hardware, firmware, and software end to end."
+  },
+  "timeline": {
+    "replay": "Replay drawing"
+  },
+  "workPage": {
+    "onThisPage": "On this page",
+    "overview": "Overview",
+    "spec": {
+      "role": "Role",
+      "scope": "Scope",
+      "status": "Status",
+      "builtWith": "Built with"
+    },
+    "sections": {
+      "problem": "The problem",
+      "what-i-built": "What I built",
+      "how-it-works": "How it works",
+      "results": "Results",
+      "next": "What is next"
+    }
+  },
+  "about": {
+    "title": "About",
+    "metaDescription": "Software developer and founder working across software, hardware, and product development.",
+    "paragraphs": [
+      "I'm a software developer and founder working across software, hardware, and product development. I also compete in fencing, which led directly to JustIn. I saw a problem in a sport I know deeply and decided to build the technology I wanted to exist.",
+      "I enjoy taking ambiguous problems, building complete systems, testing them with real people, and using what I learn to build the next version."
+    ]
+  },
+  "cv": {
+    "title": "CV",
+    "metaDescription": "Experience and résumé for Justin J De La Cruz, founder and software developer.",
+    "download": "Download PDF",
+    "experience": "Experience"
+  },
+  "contact": {
+    "title": "Contact",
+    "metaDescription": "Get in touch about hardware-software products, athletic technology, AI, or founder journeys.",
+    "intro": "Interested in hardware-software products, athletic technology, AI, or founder journeys?",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "resume": "Résumé"
+  }
+}

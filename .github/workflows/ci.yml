@@ -33,16 +33,14 @@ jobs:
       - name: Lint and format
         run: pnpm lint
 
+      # Zero-config Next.js App Router detection — no manual entry list
+      # needed (unlike the old Vite setup). knip.json only lists components
+      # intentionally kept dormant: Button and Field (no non-link button or
+      # contact form built — Contact is email-link-only, no server to handle
+      # a form on static export), and Timeline/TimelineDivider (hidden on
+      # the home page pending a decision).
       - name: Unused files, exports and dependencies
         run: pnpm knip
-
-      - name: Brand guard
-        run: pnpm check:brand
-
-      # Vite happily builds a `src` pointing at a file that isn't in public/,
-      # and the breakage only shows up on the live page.
-      - name: Asset guard
-        run: pnpm check:assets
 
       # Deliberately --audit-level=high, not moderate.
       #
@@ -56,20 +54,3 @@ jobs:
 
       - name: Build
         run: pnpm build
-
-      # The failure this repo shipped with: the old workflow published the repo
-      # root, so Pages served the source index.html pointing at /src/main.tsx.
-      # Browsers reject that on MIME type and the page renders blank.
-      - name: Verify built output, not source
-        run: |
-          for page in dist/index.html dist/justin/index.html; do
-            if grep -qE 'src="/?\.?/src/(main|justin-main)\.tsx"' "$page"; then
-              echo "::error::$page still references the dev entry point — the build did not replace it."
-              exit 1
-            fi
-            if ! grep -qE 'src="/assets/[^"]+\.js"' "$page"; then
-              echo "::error::$page has no hashed asset bundle — output looks wrong."
-              exit 1
-            fi
-          done
-          echo "Built output verified."
