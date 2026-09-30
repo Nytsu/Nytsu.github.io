@@ -176,6 +176,15 @@
 /* ---------------------------------------------------------------------------
    Base
 --------------------------------------------------------------------------- */
+
+/* Brief section 8: paired with layout.tsx's viewport-fit=cover — without
+   this, cover mode lets content render under a device notch/dynamic
+   island. Matches the reference style tile's own :root pattern. */
+html {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 body {
   background-color: var(--color-bg);
   color: var(--color-ink);
@@ -186,8 +195,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Brief section 6.8/8: text links are accent and underlined. Tailwind's
+   preflight sets `a { text-decoration: inherit }`, which (with no ancestor
+   underline to inherit) left every link with no underline at all — the
+   offset/thickness below were dead rules with nothing to apply to.
+   `text-decoration-line: underline` is the actual fix; chrome links that
+   should stay clean (nav, footer, card titles) opt out with `no-underline`
+   explicitly, same as brief's approach elsewhere. */
 a {
   color: var(--color-accent);
+  text-decoration-line: underline;
   text-underline-offset: 0.2em;
   text-decoration-thickness: 1px;
 }

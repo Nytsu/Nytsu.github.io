@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { buttonClasses } from "@/components/button";
 import { Container } from "@/components/container";
 import { experience } from "@/lib/experience";
 import { resumeHref } from "@/lib/site";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("cv");
+  return {
+    title: t("title"),
+    description: t("metaDescription"),
+    alternates: { canonical: "/cv" },
+  };
+}
 
 /** Brief section 5: page plus downloadable PDF, with a print stylesheet.
  * The print rules themselves live in globals.css (a `print:` media query),

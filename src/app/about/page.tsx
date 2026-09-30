@@ -1,5 +1,15 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/container";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("about");
+  return {
+    title: t("title"),
+    description: t("metaDescription"),
+    alternates: { canonical: "/about" },
+  };
+}
 
 export default async function About() {
   const t = await getTranslations("about");

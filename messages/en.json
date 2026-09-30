@@ -18,7 +18,8 @@
   },
   "home": {
     "tagline": "Software Developer · Founder",
-    "work": "Work"
+    "work": "Work",
+    "metaDescription": "Founder and engineer building hardware, firmware, and software end to end."
   },
   "timeline": {
     "replay": "Replay drawing"
@@ -42,6 +43,7 @@
   },
   "about": {
     "title": "About",
+    "metaDescription": "Software developer and founder working across software, hardware, and product development.",
     "paragraphs": [
       "I'm a software developer and founder working across software, hardware, and product development. I also compete in fencing, which led directly to JustIn. I saw a problem in a sport I know deeply and decided to build the technology I wanted to exist.",
       "I enjoy taking ambiguous problems, building complete systems, testing them with real people, and using what I learn to build the next version."
@@ -49,11 +51,13 @@
   },
   "cv": {
     "title": "CV",
+    "metaDescription": "Experience and résumé for Justin J De La Cruz, founder and software developer.",
     "download": "Download PDF",
     "experience": "Experience"
   },
   "contact": {
     "title": "Contact",
+    "metaDescription": "Get in touch about hardware-software products, athletic technology, AI, or founder journeys.",
     "intro": "Interested in hardware-software products, athletic technology, AI, or founder journeys?",
     "linkedin": "LinkedIn",
     "github": "GitHub",

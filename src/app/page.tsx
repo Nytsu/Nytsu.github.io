@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/container";
 import { ProjectGallery } from "@/components/project-gallery";
 import { getAllWorkEntries } from "@/lib/work-content";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("home");
+  return {
+    title: { absolute: "Justin J De La Cruz" },
+    description: t("metaDescription"),
+    alternates: { canonical: "/" },
+  };
+}
 
 /**
  * Brief section 5: a one-sentence introduction, the timeline, the project

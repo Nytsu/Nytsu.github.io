@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -107,18 +108,20 @@ export default async function WorkPage({
   );
 }
 
-/** So every project page still gets a real title instead of the layout's
- * generic default. */
+/** Title relies on the root layout's "%s — Justin J De La Cruz" template
+ * rather than appending the name here, so every page's title is built the
+ * same way. */
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
   if (!getWorkSlugs().includes(slug)) return {};
   const { frontmatter } = getWorkEntry(slug);
   return {
-    title: `${frontmatter.title} — Justin J De La Cruz`,
+    title: frontmatter.title,
     description: frontmatter.summary,
+    alternates: { canonical: `/work/${slug}` },
   };
 }

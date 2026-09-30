@@ -56,7 +56,7 @@ export function TableOfContents({
             key={item.id}
             href={`#${item.id}`}
             aria-current={isActive ? "true" : undefined}
-            className={`relative block border-l py-1.5 pl-3 ${
+            className={`relative block border-l py-1.5 pl-3 no-underline ${
               isActive
                 ? "border-accent font-semibold text-ink"
                 : "border-line text-ink hover:border-ink"

@@ -44,7 +44,7 @@ function NavLinks({
             href={link.href}
             aria-current={active ? "page" : undefined}
             onClick={onNavigate}
-            className="inline-flex items-center gap-2 py-2 text-nav text-ink"
+            className="inline-flex min-h-11 items-center gap-2 text-nav text-ink no-underline"
           >
             {active && (
               <span

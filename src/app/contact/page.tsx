@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { buttonClasses } from "@/components/button";
 import { Container } from "@/components/container";
 import { email, github, linkedin, resumeHref } from "@/lib/site";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("contact");
+  return {
+    title: t("title"),
+    description: t("metaDescription"),
+    alternates: { canonical: "/contact" },
+  };
+}
 
 /** Brief section 5: plain email link first, no form — a static export has
  * no server to handle one (see CLAUDE.md's hosting note). */
