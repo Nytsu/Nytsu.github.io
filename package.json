@@ -18,6 +18,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@google/model-viewer": "^4.3.1",
     "@radix-ui/react-dialog": "^1.1.23",
     "gray-matter": "^4.0.3",
     "next": "^16.3.7",
