@@ -1,11 +1,5 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "ignore": [
-    "src/components/button.tsx",
-    "src/components/field.tsx",
-    "src/components/timeline.tsx",
-    "src/components/timeline-divider.tsx",
-    "src/lib/dates.ts"
-  ],
+  "ignore": ["src/components/button.tsx", "src/components/field.tsx"],
   "ignoreExportsUsedInFile": true
 }
