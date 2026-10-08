@@ -24,9 +24,13 @@
   --accent: var(--a-blue);
   --on-accent: #ffffff;
 
-  --img-radius: 4px; /* brief section 12 open decision, resolved: "slight"
-    rounding for images and technical drawings, not square. */
-  --control-radius: 4px; /* buttons, fields, tags */
+  --img-radius: 12px; /* brief section 12 open decision — started at a
+    "slight" 4px, bumped to a more visibly rounded 12px; still one setting
+    for every image sitewide, never square. */
+  --control-radius: 10px; /* buttons, fields, tags, and everything else
+    styled as a control (thumbnails, the lightbox close button, the gallery
+    hover wash) — bumped from 4px alongside --img-radius, slightly smaller
+    since these are mostly much shorter elements than a lead image. */
 
   /* Self-hosted via next/font (see layout.tsx) — the literal font names
      never round-trip through Google's CSS, only the variable does. */
@@ -142,29 +146,20 @@
      separate spacing scale is defined here. */
   --container-page: 70rem; /* 1120px */
 
-  /* Timeline (brief section 6.4) — the one signature motion on the site. Reduced
-     motion isn't handled with a separate no-animation state here: the
-     global prefers-reduced-motion rule below forces near-zero duration on
-     every animation, and `both` fill-mode guarantees the end state
-     (fully drawn, opacity 1) regardless of how fast it got there. */
-  --animate-tl-draw: tl-draw 1100ms cubic-bezier(0.3, 0.6, 0.2, 1) both;
-  --animate-tl-fade: tl-fade 400ms ease 700ms both;
-  /* Per-milestone stagger: each element sets its own --tl-delay inline
-     (the actual delay is data-driven, computed per milestone in
-     Timeline.tsx — this utility just reads whatever that element set). */
-  --animate-tl-fade-mark: tl-fade 300ms ease var(--tl-delay, 0ms) both;
+  /* ImageLightbox's open/close — brief section 7's "~180ms opacity change"
+     almost verbatim. Keyed to Radix's own data-state attribute rather than
+     React state, so it covers both directions: Radix keeps a closing
+     Dialog mounted until a CSS animation on [data-state="closed"] finishes,
+     so `dialog-out` is what gives it something to wait for. */
+  --animate-dialog-in: fade-in 180ms ease both;
+  --animate-dialog-out: dialog-fade-out 180ms ease both;
+
+  /* HeroGallery's active-item switch (brief section 7's "~180ms opacity
+     change") — reuses fade-in rather than a duplicate keyframe. */
+  --animate-gallery-fade: fade-in 180ms ease both;
 }
 
-@keyframes tl-draw {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes tl-fade {
+@keyframes fade-in {
   from {
     opacity: 0;
   }
@@ -173,51 +168,112 @@
   }
 }
 
+@keyframes dialog-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 /* ---------------------------------------------------------------------------
    Base
 --------------------------------------------------------------------------- */
 
-/* Brief section 8: paired with layout.tsx's viewport-fit=cover — without
-   this, cover mode lets content render under a device notch/dynamic
-   island. Matches the reference style tile's own :root pattern. */
-html {
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
+/* Everything below is wrapped in Tailwind's own `base` layer rather than
+   left unlayered. Per the CSS cascade-layers spec, unlayered CSS always
+   beats layered CSS regardless of specificity — so plain `a { ... }` here
+   was silently winning over utilities like `no-underline` and `text-ink`
+   everywhere they were used (nav, footer, buttons styled as links), not
+   just failing to apply the offset/thickness below. `@layer base` puts
+   this CSS where Tailwind's own base styles live, before `utilities` in
+   its layer order, so a utility class on an element still overrides it. */
+@layer base {
+  /* Brief section 8: paired with layout.tsx's viewport-fit=cover — without
+     this, cover mode lets content render under a device notch/dynamic
+     island. Matches the reference style tile's own :root pattern.
+     Deliberately NOT setting scroll-behavior: smooth here — tried it, and
+     it broke Next.js's scroll-to-top on route navigation. The router calls
+     a plain window.scrollTo(0, 0) with no explicit behavior, so it inherits
+     global smooth scrolling; that animated scroll can get interrupted by
+     the new page's own layout settling in right after navigation, leaving
+     the scroll position stuck wherever it was. The "On this page" list's
+     smooth scrolling is handled per-click instead (TableOfContents.tsx,
+     scrollIntoView), so it can't touch route-level scrolling at all. */
+  html {
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
 
-body {
-  background-color: var(--color-bg);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  font-size: var(--text-body);
-  line-height: var(--text-body--line-height);
-  font-variant-numeric: tabular-nums;
-  -webkit-font-smoothing: antialiased;
-}
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
 
-/* Brief section 6.8/8: text links are accent and underlined. Tailwind's
-   preflight sets `a { text-decoration: inherit }`, which (with no ancestor
-   underline to inherit) left every link with no underline at all — the
-   offset/thickness below were dead rules with nothing to apply to.
-   `text-decoration-line: underline` is the actual fix; chrome links that
-   should stay clean (nav, footer, card titles) opt out with `no-underline`
-   explicitly, same as brief's approach elsewhere. */
-a {
-  color: var(--color-accent);
-  text-decoration-line: underline;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 1px;
-}
+  /* Theme toggle (brief section 8/12): every color on the page resolves
+     from a token, and switching `data-theme` changes those token values
+     instantly — this is what makes that a fade instead of a snap. In
+     `@layer base` specifically so it stays the default rather than
+     fighting any element's own `transition-*` utility (e.g. the project
+     gallery's hover tint already sets its own duration) — per the same
+     cascade-layers rule noted above, a utility in the `utilities` layer
+     still wins over this. Neutralized automatically under
+     prefers-reduced-motion by the existing rule below, same as every
+     other animation on the site. */
+  *,
+  *::before,
+  *::after {
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease,
+      fill 200ms ease,
+      stroke 200ms ease;
+  }
 
-a:hover {
-  text-decoration-thickness: 2px;
-}
+  /* Brief section 6.8/8: text links are accent and underlined. Tailwind's
+     preflight sets `a { text-decoration: inherit }`, which (with no ancestor
+     underline to inherit) left every link with no underline at all — the
+     offset/thickness below were dead rules with nothing to apply to.
+     `text-decoration-line: underline` is the actual fix; chrome links that
+     should stay clean (nav, footer, card titles) opt out with `no-underline`
+     explicitly, same as brief's approach elsewhere. */
+  a {
+    color: var(--color-accent);
+    text-decoration-line: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
 
-/* Visible, on-brand focus for keyboard users (brief section 8: required). */
-:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
-  border-radius: 2px;
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Tailwind's preflight strips default markers/indent from every list —
+     restored here for MDX body content (brief section 9's "What's next"
+     plans, e.g.), the one place a plain list is the right shape for the
+     content, genuinely a list of discrete items rather than prose. */
+  ul {
+    margin-left: 1.25em;
+    list-style: disc;
+  }
+
+  li + li {
+    margin-top: 0.5rem;
+  }
+
+  /* Visible, on-brand focus for keyboard users (brief section 8: required). */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -236,6 +292,76 @@ a:hover {
     transition-duration: 0.01ms !important;
     /* biome-ignore-end lint/complexity/noImportantStyles: end of reduced-motion override */
   }
+
+  /* View Transition pseudo-elements live outside the normal DOM tree, so
+     the universal selector above never matches them — they need their
+     own reduced-motion override. */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    /* biome-ignore-start lint/complexity/noImportantStyles: vestibular accessibility override, see above */
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    /* biome-ignore-end lint/complexity/noImportantStyles: end of reduced-motion override */
+  }
+}
+
+/* Route-change crossfade. Plain opacity, not scale — WCAG 2.3.3 treats a
+   change in size as motion but exempts opacity, and the scale added
+   nothing worth that trade. Asymmetric timing: the old page exits
+   quickly, the new one arrives a beat later and a bit slower, so they
+   barely overlap instead of blending through each other. */
+@keyframes page-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+::view-transition-old(root) {
+  animation: 120ms ease both page-fade reverse;
+}
+
+::view-transition-new(root) {
+  animation: 220ms ease 60ms both page-fade;
+}
+
+/* The ::view-transition overlay sits on top of the page and captures
+   pointer events while running, silently dropping clicks that land during
+   the transition. This lets them fall through instead. */
+::view-transition {
+  pointer-events: none;
+}
+
+/* The browser also animates the root box's own size when old and new
+   pages have different scrollable heights, which looks like the page
+   sliding rather than fading in place. Turning that off leaves just the
+   crossfade. */
+::view-transition-group(root) {
+  animation: none;
+}
+
+/* The header never takes part in the crossfade — it's identical on every
+   page, so fading it would only read as a flicker. Scoped to the direct
+   child of body rather than every `header`, since a view-transition-name
+   must be unique among elements on screen at once. */
+body > header {
+  view-transition-name: site-header;
+}
+
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
 }
 
 /* ---------------------------------------------------------------------------
