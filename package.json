@@ -21,7 +21,7 @@
     "@google/model-viewer": "^4.3.1",
     "@radix-ui/react-dialog": "^1.1.23",
     "gray-matter": "^4.0.3",
-    "next": "^16.3.7",
+    "next": "^16.4.0",
     "next-intl": "^4.14.8",
     "next-mdx-remote": "^6.0.0",
     "react": "^19.2.8",
@@ -41,5 +41,10 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,css}": "biome check --write --no-errors-on-unmatched"
+  },
+  "pnpm": {
+    "overrides": {
+      "source-map-js": "^1.2.2"
+    }
   }
 }
