@@ -1,50 +1,23 @@
-import Link from "next/link";
 import { Figure } from "@/components/figure";
+import { ScrollTopLink as Link } from "@/components/scroll-top-link";
 
 export type ProjectGalleryItem = {
   slug: string;
   href: string;
   name: string;
+  summary: string;
   role: string;
   builtWith: string;
+  order: number;
   status: { label: string; active: boolean };
-  mainImage?: { src: string; alt: string };
+  mainImage?: { src: string; alt: string; background?: string };
 };
 
 /**
- * Brief section 6.3: the home page centerpiece. Every project, including
- * JustIn, gets the identical treatment here — a large, consistently-framed
- * image followed by a spare, museum-placard-style caption. One visual
- * grammar for every entry rather than a special "featured" layout for one
- * and a plain list for the rest — standardized, and closer to how a curated
- * image gallery presents work than a data table does.
- *
- * Named "Project", not "Work", deliberately: the public-facing nav label
- * and section heading stay "Work" (brief section 5's explicit nav spec —
- * not ours to rename), but that's just the container's label. Each entry is
- * a self-directed project, matching both the brief's own content-model
- * language (section 9: "Projects (initial set)") and the old site's
- * content.ts, which had a `Project` type for this same data. Internal code
- * names don't have to mirror public UI copy.
- *
- * The caption is a title row (name, with status as a badge opposite it —
- * a familiar "state indicator across from the title" pattern) and one
- * meta line below (role · built-with), rather than three same-styled lines
- * stacked with no hierarchy between them.
- *
- * Two per row on wide screens, stacked on narrow ones — contained images,
- * not full-bleed, since two edge-to-edge images can't sit side by side. The
- * image dims slightly until the row is hovered/focused (Figure's
- * `interactive` prop) — opacity only, per brief section 7. A subtle
- * `bg-subtle` wash appears on hover/focus too, but only then — a permanent
- * background behind every item would combine with the rounded image
- * corners into the "identical rounded card grid" look brief section 2
- * avoids. The `-m-4 p-4` pair insets the wash without shifting the image's
- * actual position in the grid.
- *
- * mainImage is frontmatter.cover — the same image used as that project's
- * own page's lead figure. A project without one yet shows a quiet
- * placeholder, not a gap.
+ * Brief section 6.3: one full-width row per project, image after text in
+ * the DOM so mobile reads what it is before how it looks. The accent tint
+ * only shows on hover — a permanent background would read as the "card
+ * grid" look brief section 2 avoids.
  */
 export function ProjectGallery({
   items,
@@ -52,26 +25,19 @@ export function ProjectGallery({
   items: readonly ProjectGalleryItem[];
 }) {
   return (
-    <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2">
+    <div>
       {items.map((item) => (
         <Link
           key={item.slug}
           href={item.href}
-          className="group -m-4 block rounded-control p-4 no-underline hover:bg-subtle focus-visible:bg-subtle"
+          className="group grid grid-cols-1 items-center gap-6 border border-transparent rounded-img p-8 no-underline transition-colors duration-200 hover:border-accent hover:bg-accent/10 focus-visible:border-accent focus-visible:bg-accent/10 sm:grid-cols-2 sm:gap-10"
         >
-          <Figure
-            {...(item.mainImage
-              ? { src: item.mainImage.src, alt: item.mainImage.alt }
-              : {})}
-            ratio="4/3"
-            interactive
-          />
-          <div className="mt-4">
-            <div className="flex items-baseline justify-between gap-3">
-              <h3 className="truncate font-head text-h3 font-semibold text-ink underline-offset-[0.2em] decoration-1 group-hover:text-accent group-hover:underline">
+          <div>
+            <div className="flex items-start justify-between gap-3">
+              <h3 className="font-head text-h2 font-semibold text-ink group-hover:text-accent">
                 {item.name}
               </h3>
-              <span className="inline-flex flex-none items-center gap-1.5 text-small text-muted">
+              <span className="mt-1.5 inline-flex flex-none items-center gap-1.5 text-small text-muted">
                 <span
                   aria-hidden="true"
                   className={`h-2.5 w-2.5 rounded-full ${
@@ -81,10 +47,28 @@ export function ProjectGallery({
                 {item.status.label}
               </span>
             </div>
-            <p className="mt-1 text-small text-muted">
+            <p className="mt-3 max-w-prose text-body text-muted">
+              {item.summary}
+            </p>
+            <p className="mt-4 text-label text-muted opacity-70">
               {item.role} · {item.builtWith}
             </p>
           </div>
+
+          <Figure
+            {...(item.mainImage
+              ? {
+                  src: item.mainImage.src,
+                  alt: item.mainImage.alt,
+                  ...(item.mainImage.background
+                    ? { background: item.mainImage.background }
+                    : {}),
+                }
+              : {})}
+            ratio="16/9"
+            interactive
+            fit="contain"
+          />
         </Link>
       ))}
     </div>

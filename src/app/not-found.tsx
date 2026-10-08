@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/container";
+import { ScrollTopLink as Link } from "@/components/scroll-top-link";
 
 export default async function NotFound() {
   const t = await getTranslations("notFound");

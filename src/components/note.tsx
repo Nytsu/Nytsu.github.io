@@ -14,7 +14,7 @@ export function Note({
   return (
     <div className="max-w-[52ch] border-t border-ink pt-3">
       <h4 className="component-title text-ink">{title}</h4>
-      <p className="mt-1 text-nav text-muted">{children}</p>
+      <div className="mt-1 text-nav text-muted [&_p]:m-0">{children}</div>
     </div>
   );
 }

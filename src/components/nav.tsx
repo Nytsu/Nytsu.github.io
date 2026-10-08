@@ -7,15 +7,18 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Container } from "@/components/container";
 import { Mark } from "@/components/mark";
+import { ThemeToggle } from "@/components/theme-toggle";
 
-/** Four items max (brief section 5). "Work" points at home: the project index is
- * the home page's centerpiece (brief section 5), not a separate route — only
- * individual case studies get their own URL, under /work/[slug]. */
+/** Four items max (brief section 5); three in use. "Work" points at home: the
+ * project index is the home page's centerpiece (brief section 5), not a
+ * separate route — only individual case studies get their own URL, under
+ * /work/[slug]. Contact isn't its own nav item or page: it's a section on
+ * About (the footer already repeats email/GitHub/LinkedIn on every page,
+ * which made a standalone Contact page mostly redundant). */
 const links = [
   { key: "work", href: "/" },
   { key: "about", href: "/about" },
   { key: "cv", href: "/cv" },
-  { key: "contact", href: "/contact" },
 ] as const;
 
 function isActive(pathname: string, href: string) {
@@ -44,6 +47,7 @@ function NavLinks({
             href={link.href}
             aria-current={active ? "page" : undefined}
             onClick={onNavigate}
+            onNavigate={() => window.scrollTo(0, 0)}
             className="inline-flex min-h-11 items-center gap-2 text-nav text-ink no-underline"
           >
             {active && (
@@ -60,62 +64,74 @@ function NavLinks({
   );
 }
 
+/** Flat and always solid — no border, no scroll-based transparency. A
+ * translucent "see content behind it" header was considered and dropped:
+ * even without blur, it's the same visual language as the brief's
+ * "glass effects" avoid-item (section 2). */
 export function Nav() {
   const t = useTranslations("nav");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="border-b border-line print:hidden">
+    <header className="sticky top-0 z-30 bg-bg print:hidden">
       <Container className="flex h-18 items-center justify-between">
-        <Link href="/" aria-label={t("home")}>
+        <Link
+          href="/"
+          aria-label={t("home")}
+          onNavigate={() => window.scrollTo(0, 0)}
+        >
           <Mark size="sm" />
         </Link>
 
-        <NavLinks
-          pathname={pathname}
-          className="hidden items-center gap-6 sm:flex"
-        />
+        <div className="flex items-center gap-2 sm:gap-4">
+          <NavLinks
+            pathname={pathname}
+            className="hidden items-center gap-6 sm:flex"
+          />
 
-        <Dialog.Root open={open} onOpenChange={setOpen}>
-          <Dialog.Trigger asChild>
-            <button
-              type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-control border border-line text-ink sm:hidden"
-              aria-label={t("openMenu")}
-            >
-              <MenuIcon />
-            </button>
-          </Dialog.Trigger>
-          <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 z-40 bg-ink/40 sm:hidden" />
-            <Dialog.Content
-              className="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-bg p-6 sm:hidden"
-              aria-describedby={undefined}
-            >
-              <div className="flex items-center justify-between">
-                <Dialog.Title asChild>
-                  <Mark size="sm" />
-                </Dialog.Title>
-                <Dialog.Close asChild>
-                  <button
-                    type="button"
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-control border border-line text-ink"
-                    aria-label={t("closeMenu")}
-                  >
-                    <CloseIcon />
-                  </button>
-                </Dialog.Close>
-              </div>
+          <ThemeToggle lightLabel={t("lightMode")} darkLabel={t("darkMode")} />
 
-              <NavLinks
-                pathname={pathname}
-                onNavigate={() => setOpen(false)}
-                className="mt-8 flex flex-col gap-1"
-              />
-            </Dialog.Content>
-          </Dialog.Portal>
-        </Dialog.Root>
+          <Dialog.Root open={open} onOpenChange={setOpen}>
+            <Dialog.Trigger asChild>
+              <button
+                type="button"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-control border border-line text-ink sm:hidden"
+                aria-label={t("openMenu")}
+              >
+                <MenuIcon />
+              </button>
+            </Dialog.Trigger>
+            <Dialog.Portal>
+              <Dialog.Overlay className="fixed inset-0 z-40 bg-ink/40 sm:hidden" />
+              <Dialog.Content
+                className="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-bg p-6 sm:hidden"
+                aria-describedby={undefined}
+              >
+                <div className="flex items-center justify-between">
+                  <Dialog.Title asChild>
+                    <Mark size="sm" />
+                  </Dialog.Title>
+                  <Dialog.Close asChild>
+                    <button
+                      type="button"
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-control border border-line text-ink"
+                      aria-label={t("closeMenu")}
+                    >
+                      <CloseIcon />
+                    </button>
+                  </Dialog.Close>
+                </div>
+
+                <NavLinks
+                  pathname={pathname}
+                  onNavigate={() => setOpen(false)}
+                  className="mt-8 flex flex-col gap-1"
+                />
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
+        </div>
       </Container>
     </header>
   );
