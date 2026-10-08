@@ -1,7 +1,9 @@
 import { Container } from "@/components/container";
-import { email, github, linkedin } from "@/lib/site";
+import { email, github, linkedin, name } from "@/lib/site";
 
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="border-t border-line print:hidden">
       <Container className="flex flex-col gap-1 py-8 text-small text-muted sm:flex-row sm:items-center sm:justify-between">
@@ -11,6 +13,9 @@ export function Footer() {
         >
           {email}
         </a>
+        <p>
+          © {year} {name}
+        </p>
         <div className="flex gap-6">
           <a
             href={github}
