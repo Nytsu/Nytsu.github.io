@@ -1,39 +1,54 @@
 ---
 title: "SprayCube"
 slug: "spraycube"
-summary: "Plant nutrient sensing and dosing device, built with NASA Flash Pose technology."
-role: "Creator, NASA Flash Pose program"
-scope: "Hardware, sensing"
+summary: "Plant nutrient sensing and dosing device, built for the Puerto Rico Science Trust's Challenge to Innovate program."
+role: "Team member and technical lead (software & hardware)"
 status: "Completed"
-builtWith: "Sensing, dosing, Flash Pose"
-year: "2020"
+builtWith: ["Sensing", "dosing", "Computer vision"]
+year: "March–May 2021"
 order: 3
+cover:
+  src: "/images/spraycube/spraycube-icon.png"
+  alt: "A rendered view of the SprayCube 3D model against a black background."
+thumbnail:
+  src: "/images/spraycube/spraycube-icon-thumb.png"
+  alt: "A rendered view of the SprayCube 3D model."
+  background: "#0b0d10"
+gallery:
+  - src: "/images/spraycube/spraycube-prototype-1.png"
+    alt: "The physical SprayCube prototype, a black enclosure with a camera mounted on one side."
+    caption: "Physical prototype"
+  - src: "/images/spraycube/spraycube-prototype-2.png"
+    alt: "Another view of the physical SprayCube prototype, a black enclosure with a camera mounted on one side."
+    caption: "Physical prototype"
+team:
+  - name: "Puerto Rico Science, Technology and Research Trust"
+    role: "Organization"
+    initials: "PR"
+    avatar: "/images/orgs/puerto-rico-science-trust.png"
+reference:
+  label: "Watch the demo"
+  href: "https://www.youtube.com/watch?v=-HW_5Rt0QWQ&t=952s"
 ---
 
 <Section id="problem">
-<Note title="Content needed">
-The specific problem SprayCube addressed hasn't been written up yet — check with Justin before publishing.
-</Note>
+Agriculture often wastes nutrients and chemicals, applying more than a plant actually needs. SprayCube was built to sense and dose more precisely, cutting that waste.
 </Section>
 
 <Section id="what-i-built">
-A plant nutrient sensing and dosing device, made with NASA Flash Pose technology during the 2020 Puerto Rico Science Trust "Challenge to Innovate" program.
+A plant nutrient sensing and dosing device, built as Team #1 FlashPose for the 2021 Puerto Rico Science Trust "Challenge to Innovate" program. FlashPose was NASA's C-based algorithm for terrain estimation and vehicle positioning, offered as a starting point; since SprayCube needed a different kind of recognition, we built our own computer vision approach instead.
+
+<ProjectModel src="/models/spraycube.glb" alt="A 3D model of the SprayCube device" caption="SprayCube, modeled in SketchUp, May 20, 2021." />
 </Section>
 
 <Section id="how-it-works">
-<Note title="Content needed">
-How the sensing and dosing actually works hasn't been written up yet — check with Justin before publishing.
-</Note>
+A camera on the device captures the plant, and custom computer vision code (built instead of using NASA's original algorithm) judges what the plant needs. The device then doses nutrients and chemicals accordingly, instead of applying a fixed amount every time.
 </Section>
 
 <Section id="results">
-<Note title="Content needed">
-Outcomes from the program haven't been written up yet — check with Justin before publishing.
-</Note>
+Presented at the Challenge to Innovate: NASA Edition Demo Day on May 29, 2021, as the first team to present, among 20 university teams that spent 12 weeks building their own NASA-technology-based projects. SprayCube was covered by <a href="https://www.elvocero.com/educacion/universitarios-de-la-isla-se-destacan-en-el-challenge-to-innovate-nasa-edition/article_6fbed1d6-c896-11eb-9742-27a657c111d5.html" target="_blank" rel="noopener noreferrer">El Vocero</a> and <a href="https://www.wjournalpr.com/business-gallery/students-present-innovative-solutions-at-challenge-to-innovate-nasa-edition/article_cff65f80-c0ec-11eb-99e5-ffbe7e904831.html" target="_blank" rel="noopener noreferrer">The Weekly Journal</a> alongside the event's other projects.
 </Section>
 
 <Section id="next">
-<Note title="Content needed">
-This project is completed; no further work is planned, but that hasn't been confirmed with Justin.
-</Note>
+SprayCube concluded with the program. No further work is planned.
 </Section>
