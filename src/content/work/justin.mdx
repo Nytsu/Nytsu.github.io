@@ -3,23 +3,24 @@ title: "JustIn"
 slug: "justin"
 summary: "Wireless scoring and performance measurement for competitive fencing."
 role: "Founder and engineer"
-scope: "Hardware, firmware, app, brand"
-status: "In testing"
-builtWith: "React Native, embedded firmware, Bluetooth LE"
+status: "Building and testing"
+builtWith: ["React Native", "embedded firmware", "Bluetooth LE"]
 year: "2024–present"
 order: 1
-milestones:
-  - date: "2024-04"
-    label: "First components ordered"
-  - date: "2025-08"
-    label: "Active development starts"
-  - date: "2026-07"
-    label: "App complete"
-  - date: "2026-08"
-    label: "First club test, all bouts ran"
-  - date: "2027-01"
-    label: "Launch target"
-    future: true
+cover:
+  src: "/images/justin/justin-icon.jpg"
+  alt: "A hand holding the JustIn unit, a white 3D-printed enclosure with a three-pin connector port, against a plain background."
+gallery:
+  - src: "/images/justin/justin-connecting-unit.jpg"
+    alt: "A hand holding the JustIn unit, with its connector port visible, next to a gloved hand holding a fencer's cable connector, about to plug in."
+    caption: "Connecting the unit"
+    fit: "contain"
+  - src: "/images/justin/justin-test-live.jpg"
+    alt: "Two fencers mid-bout on a strip, with a laptop showing JustIn's live scoring screen on a bench between them, alongside a traditional scoring box."
+    caption: "The August 2026 field test"
+  - src: "/images/justin/justin-prototype-3.7.png"
+    alt: "Two earlier JustIn prototype enclosures (v3.7), white 3D-printed boxes with the Nytsu logo embossed on the front, standing on a glass surface."
+    caption: "An earlier prototype (v3.7)"
 ---
 
 <Section id="problem">
@@ -30,16 +31,20 @@ Current scoring systems are expensive, wired, and generally do not provide meani
 JustIn is a wireless scoring and performance-measurement system for competitive fencing: hardware, firmware, mobile app, backend, and product design, built end to end as the flagship product of my company, Nytsu.
 
 Fencing scoring hasn't meaningfully changed in decades: a wired box scores a bout and nothing else. JustIn keeps the accuracy fencers already trust and adds what's missing: no wires, and a record of how a fencer actually fenced.
+
+Work started in April 2024, moved into active development in August 2025, and moved into testing by July 2026. It's still in development, testing, and iterating.
 </Section>
 
 <Section id="how-it-works">
-Each fencer wears a microcontroller unit that talks Bluetooth Low Energy directly to a phone: no router, no strip wiring, no external infrastructure. The phone resolves scoring in real time and syncs bout data to the backend, where it becomes the historical record wired boxes never kept.
+Each fencer wears or has a JustIn unit that connects to any device, phone or tablet, where the app is downloaded. The device resolves scoring in real time and syncs bout data to the backend, where it becomes the historical record wired boxes never kept.
 
-Épée touches are resolved with VirtualGround, a proprietary approach built to answer wireless épée scoring's core question: who touched first, without a wired, grounded strip to arbitrate it.
+<ProjectVideo src="/videos/justin/justin-prototype-connecting-cable-test.mp4" caption="Connecting the prototype (v4.5) to a fencer's cable" />
 </Section>
 
 <Section id="results">
 In August 2026, I conducted a two-hour live field test with fencing instructors and club members, running the entire class using JustIn's scoring system. The system operated successfully throughout the session, while the test surfaced concrete improvements for the next iteration.
+
+<ProjectVideo src="/videos/justin/justin-august-test.mp4" caption="A bout from the August 2026 field test" />
 
 **Tested:** whether JustIn's scoring (hit detection, touch resolution, and the app itself) could run a real class end to end, in place of the club's usual wired boxes.
 
@@ -47,5 +52,9 @@ In August 2026, I conducted a two-hour live field test with fencing instructors 
 </Section>
 
 <Section id="next">
-Second field test, an analytics layer, further hardware refinement, FCC / CE certification, and paid club pilots.
+I was recently selected as one of 25 athletes worldwide for the IOC's Athlete365 Business Accelerator (Phase 3): six months of dedicated mentorship starting October 2026.
+
+- A second field test, planned for late October–November
+- Further hardware and software refinement
+- Launch target: 2027
 </Section>
