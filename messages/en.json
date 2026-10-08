@@ -6,9 +6,10 @@
     "work": "Work",
     "about": "About",
     "cv": "CV",
-    "contact": "Contact",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "lightMode": "Switch to light mode",
+    "darkMode": "Switch to dark mode"
   },
   "notFound": {
     "eyebrow": "404",
@@ -17,50 +18,63 @@
     "back": "Back to work"
   },
   "home": {
-    "tagline": "Software Developer · Founder",
+    "tagline": "Engineer · Founder",
+    "greeting": "Hello, I'm Justin,",
+    "headline": "and this is what I've been building.",
     "work": "Work",
     "metaDescription": "Founder and engineer building hardware, firmware, and software end to end."
   },
-  "timeline": {
-    "replay": "Replay drawing"
-  },
   "workPage": {
+    "backToWork": "Back to work",
     "onThisPage": "On this page",
     "overview": "Overview",
+    "nextProject": "Next project",
+    "opensInNewTab": "opens in a new tab",
+    "gallery": {
+      "prev": "Previous image",
+      "next": "Next image",
+      "showImage": "Show image {number}",
+      "viewLarger": "View image larger",
+      "closeImage": "Close image"
+    },
+    "appGallery": {
+      "prev": "Previous screen",
+      "next": "Next screen"
+    },
     "spec": {
       "role": "Role",
-      "scope": "Scope",
+      "team": "Team",
       "status": "Status",
       "builtWith": "Built with"
     },
     "sections": {
-      "problem": "The problem",
-      "what-i-built": "What I built",
+      "problem": "Problem",
+      "what-i-built": "Solution",
       "how-it-works": "How it works",
       "results": "Results",
-      "next": "What is next"
+      "next": "What's next"
     }
   },
   "about": {
     "title": "About",
-    "metaDescription": "Software developer and founder working across software, hardware, and product development.",
+    "metaDescription": "Engineer and founder working across software, hardware, and product development.",
+    "photoAlt": "Justin J De La Cruz, smiling, arms crossed, in an office setting.",
     "paragraphs": [
-      "I'm a software developer and founder working across software, hardware, and product development. I also compete in fencing, which led directly to JustIn. I saw a problem in a sport I know deeply and decided to build the technology I wanted to exist.",
-      "I enjoy taking ambiguous problems, building complete systems, testing them with real people, and using what I learn to build the next version."
-    ]
+      "I’m an engineer and founder based in Puerto Rico, working across software, hardware, and product development. As a competitive fencer, I identified a problem in a sport I know deeply and built JustIn to create the technology I wanted to exist.",
+      "I enjoy tackling ambiguous problems, building end-to-end systems, testing them with real users, and using what I learn to drive the next iteration."
+    ],
+    "contact": {
+      "heading": "Get in touch",
+      "intro": "Interested in hardware-software products, athletic technology, AI, or founder journeys?",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "resume": "Résumé"
+    }
   },
   "cv": {
     "title": "CV",
-    "metaDescription": "Experience and résumé for Justin J De La Cruz, founder and software developer.",
+    "metaDescription": "Experience and résumé for Justin J De La Cruz, founder and engineer.",
     "download": "Download PDF",
     "experience": "Experience"
-  },
-  "contact": {
-    "title": "Contact",
-    "metaDescription": "Get in touch about hardware-software products, athletic technology, AI, or founder journeys.",
-    "intro": "Interested in hardware-software products, athletic technology, AI, or founder journeys?",
-    "linkedin": "LinkedIn",
-    "github": "GitHub",
-    "resume": "Résumé"
   }
 }
