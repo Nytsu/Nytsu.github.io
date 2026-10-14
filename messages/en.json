@@ -5,7 +5,6 @@
     "home": "Home",
     "work": "Work",
     "about": "About",
-    "cv": "CV",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "lightMode": "Switch to light mode",
@@ -82,11 +81,5 @@
       "github": "GitHub",
       "resume": "Résumé"
     }
-  },
-  "cv": {
-    "title": "CV",
-    "metaDescription": "Experience and résumé for Justin J De La Cruz, founder and software developer.",
-    "download": "Download PDF",
-    "experience": "Experience"
   }
 }

@@ -9,7 +9,7 @@ import { Container } from "@/components/container";
 import { Mark } from "@/components/mark";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-/** Four items max (brief section 5); three in use. "Work" points at home: the
+/** Four items max (brief section 5); two in use. "Work" points at home: the
  * project index is the home page's centerpiece (brief section 5), not a
  * separate route — only individual case studies get their own URL, under
  * /work/[slug]. Contact isn't its own nav item or page: it's a section on
@@ -18,7 +18,6 @@ import { ThemeToggle } from "@/components/theme-toggle";
 const links = [
   { key: "work", href: "/" },
   { key: "about", href: "/about" },
-  { key: "cv", href: "/cv" },
 ] as const;
 
 function isActive(pathname: string, href: string) {
