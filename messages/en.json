@@ -5,7 +5,6 @@
     "home": "Home",
     "work": "Work",
     "about": "About",
-    "cv": "CV",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "lightMode": "Switch to light mode",
@@ -18,11 +17,11 @@
     "back": "Back to work"
   },
   "home": {
-    "tagline": "Engineer · Founder",
+    "tagline": "Software developer · Founder",
     "greeting": "Hello, I'm Justin,",
     "headline": "and this is what I've been building.",
     "work": "Work",
-    "metaDescription": "Founder and engineer building hardware, firmware, and software end to end."
+    "metaDescription": "Founder and software developer building hardware, firmware, and software end to end."
   },
   "workPage": {
     "backToWork": "Back to work",
@@ -30,6 +29,18 @@
     "overview": "Overview",
     "nextProject": "Next project",
     "opensInNewTab": "opens in a new tab",
+    "tabs": {
+      "label": "Project media",
+      "gallery": "Gallery",
+      "press": "In the press"
+    },
+    "press": {
+      "read": "Read on {outlet}",
+      "language": {
+        "en": "In English",
+        "es": "In Spanish"
+      }
+    },
     "gallery": {
       "prev": "Previous image",
       "next": "Next image",
@@ -57,10 +68,10 @@
   },
   "about": {
     "title": "About",
-    "metaDescription": "Engineer and founder working across software, hardware, and product development.",
+    "metaDescription": "Software developer and founder working across software, hardware, and product development.",
     "photoAlt": "Justin J De La Cruz, smiling, arms crossed, in an office setting.",
     "paragraphs": [
-      "I’m an engineer and founder based in Puerto Rico, working across software, hardware, and product development. As a competitive fencer, I identified a problem in a sport I know deeply and built JustIn to create the technology I wanted to exist.",
+      "I’m a software developer and founder based in Puerto Rico, working across software, hardware, and product development. As a competitive fencer, I identified a problem in a sport I know deeply and built JustIn to create the technology I wanted to exist.",
       "I enjoy tackling ambiguous problems, building end-to-end systems, testing them with real users, and using what I learn to drive the next iteration."
     ],
     "contact": {
@@ -70,11 +81,5 @@
       "github": "GitHub",
       "resume": "Résumé"
     }
-  },
-  "cv": {
-    "title": "CV",
-    "metaDescription": "Experience and résumé for Justin J De La Cruz, founder and engineer.",
-    "download": "Download PDF",
-    "experience": "Experience"
   }
 }

@@ -32,7 +32,7 @@ function Avatar({ member, ring }: { member: WorkTeamMember; ring?: boolean }) {
 /** Team's avatar display inside SpecBlock (brief section 6.7). A single
  * member (the common case today) renders inline: avatar, then name. Two or
  * more stack as overlapping circles; hovering or keyboard-focusing one
- * reveals its name in a small label beside it, via opacity only (brief
+ * reveals its name in a small label below the row, via opacity only (brief
  * section 7 allows opacity changes, never a sliding entrance — an
  * avatar-shifts-over-to-make-room version was considered and dropped for
  * exactly that reason). Each avatar is a real `<button>` (not a styled
@@ -53,18 +53,20 @@ export function AvatarGroup({ team }: { team: readonly WorkTeamMember[] }) {
   }
 
   return (
-    <div className="flex items-center">
+    <div className="relative flex items-center">
       {team.map((member, index) => (
         <button
           key={member.name}
           type="button"
           aria-label={member.name}
-          className={`group relative flex-none ${index > 0 ? "-ml-2.5" : ""}`}
+          className={`group flex-none ${index > 0 ? "-ml-2.5" : ""}`}
         >
           <Avatar member={member} ring />
+          {/* `hidden` until shown: an invisible label would still widen the
+              scrollable area on a narrow screen. `starting:` keeps the fade-in. */}
           <span
             aria-hidden="true"
-            className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-full z-10 ml-2 whitespace-nowrap rounded-control border border-line bg-bg px-2 py-1 text-small text-ink opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+            className="pointer-events-none absolute top-full left-0 z-10 mt-2 hidden w-max max-w-[min(18rem,calc(100vw-10rem))] rounded-control border border-line bg-bg px-2 py-1 text-small text-ink opacity-100 transition-opacity duration-150 group-hover:block group-focus-visible:block starting:opacity-0"
           >
             {member.name}
           </span>

@@ -73,9 +73,8 @@
   --on-accent: #0b0d10;
 }
 
-/* Print (brief section 5: CV needs a print stylesheet). Force light values
-   regardless of OS dark-mode preference — paper is white, and printing
-   white text on the assumed-dark background would be unreadable. */
+/* Print: force light values regardless of OS dark-mode preference — paper
+   is white, and white text on the assumed-dark background is unreadable. */
 @media print {
   :root {
     --bg: #ffffff;

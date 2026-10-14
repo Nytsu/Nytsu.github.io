@@ -5,7 +5,7 @@ import { getWorkSlugs } from "@/lib/work-content";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["", "/about", "/cv"];
+  const staticPaths = ["", "/about"];
   const workPaths = getWorkSlugs().map((slug) => `/work/${slug}`);
 
   return [...staticPaths, ...workPaths].map((path) => ({

@@ -19,7 +19,7 @@ export default async function About() {
   const paragraphs = t.raw("paragraphs") as string[];
 
   return (
-    // Same top padding as every other page's Container (CV) so About starts
+    // Same top padding as every other page's Container so About starts
     // at the same vertical position when navigating between them — not
     // vertically centered, which looked balanced in isolation but put
     // About's content at a different height than its neighbors.

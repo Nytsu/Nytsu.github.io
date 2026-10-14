@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s — Justin J De La Cruz",
   },
   description:
-    "Founder and engineer building hardware, firmware, and software end to end.",
+    "Founder and software developer building hardware, firmware, and software end to end.",
 };
 
 /** Brief section 8: viewport-fit=cover, paired with safe-area-inset padding
