@@ -43,6 +43,20 @@ export type WorkGalleryItem =
     }
   | { kind: "video"; src: string; caption?: string };
 
+/** A press mention, shown as a text preview (outlet, headline, excerpt)
+ * linking out, so no third-party screenshot is needed. */
+export type WorkArticle = {
+  href: string;
+  outlet: string;
+  title: string;
+  /** The outlet's own summary or opening line, quoted as published and
+   * kept short; omitted when the page offers none. */
+  excerpt?: string;
+  /** Language the article is written in; shown on the preview and set as
+   * the text's `lang` for screen readers. */
+  language?: "en" | "es";
+};
+
 export type WorkFrontmatter = {
   title: string;
   slug: string;
@@ -70,6 +84,8 @@ export type WorkFrontmatter = {
    * image the way `Figure`'s own caption does). A `kind: "video"` entry
    * skips `alt`: it has no static description, just the caption. */
   gallery?: WorkGalleryItem[];
+  /** Press coverage, listed under the lead gallery. */
+  press?: WorkArticle[];
   /** One external place to see or read more — the live product, a press
    * article, anything off-site. `label` says what it is in this project's
    * own words ("Visit site", "Read the feature", ...) rather than assuming

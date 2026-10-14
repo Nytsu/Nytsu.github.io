@@ -8,8 +8,10 @@ import { ChevronIcon } from "@/components/chevron-icon";
 import { Container } from "@/components/container";
 import { Figure } from "@/components/figure";
 import { HeroGallery } from "@/components/hero-gallery";
+import { MediaTabs } from "@/components/media-tabs";
 import { Note } from "@/components/note";
 import { PhoneGallery, PhoneScreen } from "@/components/phone-gallery";
+import { PressList } from "@/components/press-list";
 import { ProjectModel } from "@/components/project-model";
 import { ProjectVideo } from "@/components/project-video";
 import { ScrollReadingProgress } from "@/components/scroll-reading-progress";
@@ -73,6 +75,18 @@ export default async function WorkPage({
     : [];
   const heroThumbnailLabels = heroImages.map((_, index) =>
     t("gallery.showImage", { number: index + 1 }),
+  );
+
+  const heroGallery = (
+    <HeroGallery
+      images={heroImages}
+      ratio="16/9"
+      prevLabel={t("gallery.prev")}
+      nextLabel={t("gallery.next")}
+      thumbnailLabels={heroThumbnailLabels}
+      openImageLabel={t("gallery.viewLarger")}
+      closeImageLabel={t("gallery.closeImage")}
+    />
   );
 
   const sectionLabels = Object.fromEntries(
@@ -153,15 +167,27 @@ export default async function WorkPage({
           />
         </div>
 
-        <HeroGallery
-          images={heroImages}
-          ratio="16/9"
-          prevLabel={t("gallery.prev")}
-          nextLabel={t("gallery.next")}
-          thumbnailLabels={heroThumbnailLabels}
-          openImageLabel={t("gallery.viewLarger")}
-          closeImageLabel={t("gallery.closeImage")}
-        />
+        {frontmatter.press && frontmatter.press.length > 0 ? (
+          <MediaTabs
+            label={t("tabs.label")}
+            galleryLabel={t("tabs.gallery")}
+            pressLabel={t("tabs.press")}
+            gallery={heroGallery}
+            press={
+              <PressList
+                articles={frontmatter.press}
+                readLabel={t("press.read", { outlet: "{outlet}" })}
+                newTabLabel={t("opensInNewTab")}
+                languageLabels={{
+                  en: t("press.language.en"),
+                  es: t("press.language.es"),
+                }}
+              />
+            }
+          />
+        ) : (
+          heroGallery
+        )}
 
         <TableOfContents
           heading={t("onThisPage")}
@@ -175,7 +201,7 @@ export default async function WorkPage({
           <p className="text-label text-muted">{t("nextProject")}</p>
           <Link
             href={`/work/${nextEntry.frontmatter.slug}`}
-            className="group -m-4 mt-2 flex items-center gap-6 rounded-control p-4 no-underline transition-colors duration-200 hover:bg-accent/10 focus-visible:bg-accent/10"
+            className="group -mx-2 -mb-4 mt-2 flex items-center gap-6 rounded-control p-4 no-underline transition-colors duration-200 hover:bg-accent/10 focus-visible:bg-accent/10"
           >
             <div className="w-28 flex-none sm:w-36">
               <Figure
